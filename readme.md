@@ -1,6 +1,6 @@
 ## Form validator
 
-### How to use with express
+### How to use with spark
 
 ```java
 import fr.maed.website.kwizzy.validation.Validator;
