@@ -4,7 +4,7 @@ import org.junit.Test;
 import util.UtilTest;
 
 
-public class RuleBool {
+public class RuleBoolTest {
 
     @Test
     public final void testRuleBoolOk() throws Exception {

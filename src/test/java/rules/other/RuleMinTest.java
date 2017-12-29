@@ -4,7 +4,7 @@ import org.junit.Test;
 import util.UtilTest;
 
 
-public class RuleMin {
+public class RuleMinTest {
 
     @Test
     public final void testRuleMinOk() throws Exception {

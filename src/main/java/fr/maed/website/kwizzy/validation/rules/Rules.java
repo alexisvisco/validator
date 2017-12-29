@@ -30,8 +30,8 @@ public enum Rules implements RuleObj {
     RANGE(RuleRange.class, "range", 2, ":attr must be between :1 and :2."),
 
     /// OTHER RULES
-    MAX(RuleMax.class, "max", 1, ":attr must be lesser than :1 length."),
-    MIN(RuleMin.class, "min", 1, ":attr must be at least of :1 length."),
+    MAX(RuleMax.class, "max_length", 1, ":attr must be lesser than :1 length."),
+    MIN(RuleMin.class, "min_length", 1, ":attr must be at least of :1 length."),
     DIFF(RuleDiff.class, "diff", 1, ":attr is same as :1."),
     BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),
     ;

@@ -4,7 +4,7 @@ import org.junit.Test;
 import util.UtilTest;
 
 
-public class RuleBlank {
+public class RuleBlankTest {
 
     @Test
     public final void testRuleBlankOk() throws Exception {

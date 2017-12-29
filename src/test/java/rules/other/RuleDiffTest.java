@@ -4,7 +4,7 @@ import org.junit.Test;
 import util.UtilTest;
 
 
-public class RuleDiff {
+public class RuleDiffTest {
 
     @Test
     public final void testRuleMinOk() throws Exception {
