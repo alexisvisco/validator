@@ -1,0 +1,27 @@
+group 'Validation'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+apply plugin: 'java'
+apply plugin:'application'
+mainClassName = "TestClass"
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'org.json:json:20140107'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile "com.sparkjava:spark-core:2.7.1"
+    compile 'org.apache.commons:commons-lang3:3.7'
+    compile 'org.slf4j:slf4j-nop:1.7.7'
+    compile 'commons-validator:commons-validator:1.4.1'
+    compile 'org.apache.commons:commons-jexl3:3.0'
+}
