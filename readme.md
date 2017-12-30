@@ -40,9 +40,13 @@ libraryDependencies += "com.github.AlexisVisco" % "Validator" % "LATEST"
 
 ### How to use with spark
 
+Import this in your source code : https://gist.github.com/AlexisVisco/c1d1d00577689fec6cb242b3eaa161ea
+
 ```java
-import Validator;
-import kwizzy.validation.impl.SparkForm;
+/// your package 
+
+import kwizzy.validation.Validator;
+import SparkForm;
 
 import java.util.Map;
 
