@@ -2,18 +2,16 @@ package util;
 
 import com.google.gson.Gson;
 import fr.maed.website.kwizzy.validation.Validator;
-import fr.maed.website.kwizzy.validation.exception.RuleParseException;
+import fr.maed.website.kwizzy.validation.exceptions.RuleParseException;
 import fr.maed.website.kwizzy.validation.impl.SparkForm;
 import org.json.JSONObject;
 import spark.Service;
-import spark.Spark;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.Assert.fail;
-import static util.ToMap.toMap;
 
 public class FTest {
 

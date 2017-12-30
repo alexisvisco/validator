@@ -1,4 +1,4 @@
-package fr.maed.website.kwizzy.validation.exception;
+package fr.maed.website.kwizzy.validation.exceptions;
 
 public enum LexerException {
 

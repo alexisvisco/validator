@@ -1,5 +1,6 @@
 package fr.maed.website.kwizzy.validation.config;
 
+import fr.maed.website.kwizzy.validation.config.language.LanguageList;
 import fr.maed.website.kwizzy.validation.rules.RuleObj;
 import fr.maed.website.kwizzy.validation.util.RuleList;
 
@@ -12,6 +13,7 @@ public class ValidatorConfig {
     private static ValidatorConfig cfg;
 
     public RuleList ruleList = new RuleList();
+    public LanguageList languageList = new LanguageList();
 
     private ValidatorConfig() { }
 

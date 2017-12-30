@@ -1,6 +1,7 @@
 package fr.maed.website.kwizzy.validation;
 
-import fr.maed.website.kwizzy.validation.exception.RuleParseException;
+import fr.maed.website.kwizzy.validation.exceptions.LanguageNotFoundException;
+import fr.maed.website.kwizzy.validation.exceptions.RuleParseException;
 import fr.maed.website.kwizzy.validation.impl.Form;
 import fr.maed.website.kwizzy.validation.parser.RuleLexer;
 import fr.maed.website.kwizzy.validation.parser.RuleParser;
@@ -10,12 +11,15 @@ import fr.maed.website.kwizzy.validation.util.ConstructRule;
 
 import java.util.*;
 
+import static fr.maed.website.kwizzy.validation.config.ValidatorConfig.cfg;
+
 public class Validator {
 
 
     private Form form;
     private Map<String, Rule> rules = new HashMap<>();
     private Map<String, String> errors = new HashMap<>();
+    private String lang = "en";
 
     public Validator() { }
 
@@ -62,9 +66,15 @@ public class Validator {
             }
             boolean okay = value.isOkay(form);
             RuleInfo ruleInfo = value.getRuleInfo();
-            RuleObj ruleObj = ruleInfo.getRuleObj();
-            if (!okay)
-                errors.put(key, ruleObj.getDefaultMessage(ruleInfo));
+            Optional<String> messageFor = Optional.empty();
+            try {
+                messageFor = cfg().languageList.getByLanguage(lang).getMessageFor(ruleInfo.getRuleName(), ruleInfo);
+            } catch (LanguageNotFoundException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+            if (messageFor.isPresent() && !okay)
+                errors.put(key, messageFor.get());
         });
         return errors;
     }

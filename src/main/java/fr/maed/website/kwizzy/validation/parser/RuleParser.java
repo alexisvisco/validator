@@ -1,7 +1,7 @@
 package fr.maed.website.kwizzy.validation.parser;
 
 import fr.maed.website.kwizzy.validation.RuleInfo;
-import fr.maed.website.kwizzy.validation.exception.RuleParseException;
+import fr.maed.website.kwizzy.validation.exceptions.RuleParseException;
 import fr.maed.website.kwizzy.validation.rules.RuleObj;
 
 import java.util.ArrayList;

@@ -7,7 +7,9 @@ public interface RuleObj {
 
     Class<? extends Rule> getRule();
 
-    String getDefaultMessage(RuleInfo r);
+    String getDefaultMessage();
+
+    void setDefaultMessage(String ruleName, String message);
 
     String getRuleName();
 

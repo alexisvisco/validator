@@ -11,6 +11,9 @@ import fr.maed.website.kwizzy.validation.rules.list.other.RuleMin;
 import fr.maed.website.kwizzy.validation.rules.list.number.*;
 import fr.maed.website.kwizzy.validation.rules.list.str.*;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 public enum DefaultRules implements RuleObj {
 
     /// STRING RULES
@@ -41,8 +44,7 @@ public enum DefaultRules implements RuleObj {
     MAX(RuleMax.class, "max_length", 1, ":attr must be lesser than :1 length."),
     MIN(RuleMin.class, "min_length", 1, ":attr must be at least of :1 length."),
     DIFF(RuleDiff.class, "diff", 1, ":attr is same as :1."),
-    BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),
-    ;
+    BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),;
 
     private Class<? extends Rule> rule;
     private String defaultMessage;
@@ -63,12 +65,15 @@ public enum DefaultRules implements RuleObj {
     }
 
     @Override
-    public String getDefaultMessage(RuleInfo r) {
-        String s = this.defaultMessage.replace(":attr", r.getField());
-        for (int i = 0; i < r.getParamsCount(); i++)
-            s = s.replace(":" + (i+1), s);
-        return s;
+    public String getDefaultMessage() {
+        return defaultMessage;
     }
+
+    @Override
+    public void setDefaultMessage(String ruleName, String message) {
+        this.defaultMessage = message;
+    }
+
 
     @Override
     public String getRuleName() {
@@ -88,5 +93,11 @@ public enum DefaultRules implements RuleObj {
                 ", definer='" + definer + '\'' +
                 ", paramsCount=" + paramsCount +
                 '}';
+    }
+
+    public static Optional<RuleObj> getByRuleName(String ruleName) {
+        return Stream.of(DefaultRules.values())
+                .filter(e -> e.getRuleName().equals(ruleName))
+                .map(e -> (RuleObj)e).findFirst();
     }
 }

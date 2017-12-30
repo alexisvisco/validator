@@ -1,8 +1,8 @@
 package fr.maed.website.kwizzy.validation.parser;
 
 import fr.maed.website.kwizzy.validation.Validator;
-import fr.maed.website.kwizzy.validation.exception.LexerException;
-import fr.maed.website.kwizzy.validation.exception.RuleLexerException;
+import fr.maed.website.kwizzy.validation.exceptions.LexerException;
+import fr.maed.website.kwizzy.validation.exceptions.RuleLexerException;
 import fr.maed.website.kwizzy.validation.util.BiValue;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import static fr.maed.website.kwizzy.validation.config.ValidatorConfig.cfg;
  * This class lex all rules entered in {@link Validator#addRule(String, String)}
  * If any rule syntax is not valid, you will show something like this :
  * <pre>
- * fr.maed.website.kwizzy.validation.exception.RuleLexerException
+ * fr.maed.website.kwizzy.validation.exceptions.RuleLexerException
  * ...
  * email: (123);
  *             ^
@@ -83,7 +83,7 @@ public class RuleLexer {
             else if (!newParam && currTok.empty() && chars[i] != ' ') {
                 BiValue<StringBuilder, Integer> ruleName = getText(chars, i, RULE, false);
                 ///
-                /// exception if no rule name at begin of new rule (after | or char 0)
+                /// exceptions if no rule name at begin of new rule (after | or char 0)
                 ///
                 if (ruleName.u == -1) throw new RuleLexerException(LexerException.NEED_RULE, origin, i);
 

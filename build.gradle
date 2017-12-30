@@ -24,4 +24,5 @@ dependencies {
     compile 'org.slf4j:slf4j-nop:1.7.7'
     compile 'commons-validator:commons-validator:1.4.1'
     compile 'org.apache.commons:commons-jexl3:3.0'
+    compile 'com.google.guava:guava:23.6-jre'
 }
