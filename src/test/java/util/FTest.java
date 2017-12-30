@@ -1,9 +1,9 @@
 package util;
 
 import com.google.gson.Gson;
-import fr.maed.website.kwizzy.validation.Validator;
-import fr.maed.website.kwizzy.validation.exceptions.RuleParseException;
-import fr.maed.website.kwizzy.validation.impl.SparkForm;
+import kwizzy.validation.Validator;
+import kwizzy.validation.exceptions.RuleParseException;
+import impl.SparkForm;
 import org.json.JSONObject;
 import spark.Service;
 

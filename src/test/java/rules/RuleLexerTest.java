@@ -1,7 +1,7 @@
 package rules;
 
-import fr.maed.website.kwizzy.validation.exceptions.RuleLexerException;
-import fr.maed.website.kwizzy.validation.parser.RuleLexer;
+import kwizzy.validation.exceptions.RuleLexerException;
+import kwizzy.validation.parser.RuleLexer;
 import org.junit.Test;
 import util.UtilTest;
 

@@ -1,15 +1,13 @@
 package util;
 
 import com.google.gson.Gson;
-import fr.maed.website.kwizzy.validation.Validator;
-import fr.maed.website.kwizzy.validation.impl.SparkForm;
-import fr.maed.website.kwizzy.validation.parser.RuleLexer;
+import kwizzy.validation.Validator;
+import kwizzy.validation.parser.RuleLexer;
+import impl.SparkForm;
 import org.json.JSONObject;
 import spark.Service;
 
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import static org.junit.Assert.*;
 

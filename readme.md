@@ -3,8 +3,8 @@
 ### How to use with spark
 
 ```java
-import fr.maed.website.kwizzy.validation.Validator;
-import fr.maed.website.kwizzy.validation.impl.SparkForm;
+import Validator;
+import kwizzy.validation.impl.SparkForm;
 
 import java.util.Map;
 
