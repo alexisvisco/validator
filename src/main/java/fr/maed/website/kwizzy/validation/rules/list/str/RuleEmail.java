@@ -2,15 +2,14 @@ package fr.maed.website.kwizzy.validation.rules.list.str;
 
 import fr.maed.website.kwizzy.validation.RuleInfo;
 import fr.maed.website.kwizzy.validation.impl.Form;
-import fr.maed.website.kwizzy.validation.rules.AbstractRule;
-import fr.maed.website.kwizzy.validation.rules.Rules;
+import fr.maed.website.kwizzy.validation.rules.list.AbstractRule;
+import fr.maed.website.kwizzy.validation.rules.DefaultRules;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Optional;
 
 /**
- * Ref to {@link Rules#EMAIL}<br/>
+ * Ref to {@link DefaultRules#EMAIL}<br/>
  * Example:
  * <pre>
  * "test@"             -> false
@@ -22,14 +21,10 @@ import java.util.Optional;
  **/
 public class RuleEmail extends AbstractRule {
 
-    public RuleEmail(RuleInfo value) {
-        super(value);
-    }
-
     @Override
     public boolean isOkay(Form f) {
-        Optional<String> s = f.getString(rule.getPath());
-        return s.filter(str -> isValidEmailAddress(str)).isPresent();
+        Optional<String> s = f.getString(rule.getField());
+        return s.filter(this::isValidEmailAddress).isPresent();
     }
 
     private boolean isValidEmailAddress(String email) {

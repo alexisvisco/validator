@@ -9,11 +9,11 @@ public class RuleMinTest {
     @Test
     public final void testRuleMinOk() throws Exception {
         System.out.println("=== TEST FOR `min` RULE ===\n");
-        int port = UtilTest.launchWebServer("min:3");
+        int port = UtilTest.launchWebServer("min_length:3");
         UtilTest.testIt("abcd", port, true);
         UtilTest.testIt("ajknkjwnd", port, true);
         UtilTest.testIt("11111111111111111111", port, true);
-        port = UtilTest.launchWebServer("min:0");
+        port = UtilTest.launchWebServer("min_length:0");
         UtilTest.testIt("wdwdwdwdwa", port, true);
         UtilTest.testIt(" f eneo", port, true);
         UtilTest.testIt(".", port, true);
@@ -22,10 +22,10 @@ public class RuleMinTest {
     @Test
     public final void testRuleMinNotOk() throws Exception {
 
-        int port = UtilTest.launchWebServer("min:3");
+        int port = UtilTest.launchWebServer("min_length:3");
         UtilTest.testIt("a", port, false);
         UtilTest.testIt("", port, false);
-        port = UtilTest.launchWebServer("min:10");
+        port = UtilTest.launchWebServer("min_length:10");
         UtilTest.testIt("abcdefg", port, false);
         UtilTest.testIt(" f eneo", port, false);
         UtilTest.testIt("", port, false);

@@ -1,6 +1,9 @@
 package fr.maed.website.kwizzy.validation.rules;
 
 import fr.maed.website.kwizzy.validation.RuleInfo;
+import fr.maed.website.kwizzy.validation.rules.list.Rule;
+import fr.maed.website.kwizzy.validation.rules.list.js.RuleJsArray;
+import fr.maed.website.kwizzy.validation.rules.list.js.RuleJsObj;
 import fr.maed.website.kwizzy.validation.rules.list.other.RuleBool;
 import fr.maed.website.kwizzy.validation.rules.list.other.RuleDiff;
 import fr.maed.website.kwizzy.validation.rules.list.other.RuleMax;
@@ -8,7 +11,7 @@ import fr.maed.website.kwizzy.validation.rules.list.other.RuleMin;
 import fr.maed.website.kwizzy.validation.rules.list.number.*;
 import fr.maed.website.kwizzy.validation.rules.list.str.*;
 
-public enum Rules implements RuleObj {
+public enum DefaultRules implements RuleObj {
 
     /// STRING RULES
     ALPHA(RuleAlpha.class, "alpha", 0, ":attr is not a alpha string."),
@@ -28,6 +31,11 @@ public enum Rules implements RuleObj {
     LESSER(RuleLesser.class, "lesser", 1, ":attr must be lesser than :1."),
     HIGHER(RuleHigher.class, "higher", 1, ":attr must be higher than :1."),
     RANGE(RuleRange.class, "range", 2, ":attr must be between :1 and :2."),
+    CONFIRM(RuleConfirm.class, "confirm", 0, ":attr not match with confirmation field."),
+
+    /// JSON RULES
+    JS_ARRAY(RuleJsArray.class, "json_arr", 0, ":attr is not a json array."),
+    JS_OBJ(RuleJsObj.class, "json", 0, ":attr is not a json object."),
 
     /// OTHER RULES
     MAX(RuleMax.class, "max_length", 1, ":attr must be lesser than :1 length."),
@@ -36,12 +44,12 @@ public enum Rules implements RuleObj {
     BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),
     ;
 
-    private Class<? extends AbstractRule> rule;
+    private Class<? extends Rule> rule;
     private String defaultMessage;
     private String definer;
     private int paramsCount;
 
-    Rules(Class<? extends AbstractRule> rule, String definer, int paramsCount, String defaultMessage) {
+    DefaultRules(Class<? extends Rule> rule, String definer, int paramsCount, String defaultMessage) {
         this.rule = rule;
         this.defaultMessage = defaultMessage;
         this.paramsCount = paramsCount;
@@ -50,13 +58,13 @@ public enum Rules implements RuleObj {
 
 
     @Override
-    public Class<? extends AbstractRule> getRule() {
+    public Class<? extends Rule> getRule() {
         return rule;
     }
 
     @Override
     public String getDefaultMessage(RuleInfo r) {
-        String s = this.defaultMessage.replace(":attr", r.getPath());
+        String s = this.defaultMessage.replace(":attr", r.getField());
         for (int i = 0; i < r.getParamsCount(); i++)
             s = s.replace(":" + (i+1), s);
         return s;
@@ -74,7 +82,7 @@ public enum Rules implements RuleObj {
 
     @Override
     public String toString() {
-        return "Rules{" +
+        return "DefaultRules{" +
                 "rule=" + rule +
                 ", defaultMessage='" + defaultMessage + '\'' +
                 ", definer='" + definer + '\'' +

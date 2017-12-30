@@ -2,13 +2,13 @@ package fr.maed.website.kwizzy.validation.rules.list.other;
 
 import fr.maed.website.kwizzy.validation.RuleInfo;
 import fr.maed.website.kwizzy.validation.impl.Form;
-import fr.maed.website.kwizzy.validation.rules.AbstractRule;
-import fr.maed.website.kwizzy.validation.rules.Rules;
+import fr.maed.website.kwizzy.validation.rules.list.AbstractRule;
+import fr.maed.website.kwizzy.validation.rules.DefaultRules;
 
 import java.util.Optional;
 
 /**
- * Ref to {@link Rules#MIN}<br/>
+ * Ref to {@link DefaultRules#MIN}<br/>
  * Example:
  * <pre>
  * "123"  3    -> true
@@ -19,16 +19,12 @@ import java.util.Optional;
  **/
 public class RuleMin extends AbstractRule {
 
-    public RuleMin(RuleInfo value) {
-        super(value);
-    }
-
     @Override
     public boolean isOkay(Form f) {
-        String param = getRuleInfo().getParams()[0];
+        String param = getRuleInfo().getParams().get(0);
         try {
             int min = Integer.parseInt(param);
-            Optional<String> s = f.getString(rule.getPath());
+            Optional<String> s = f.getString(rule.getField());
             return s.filter(str -> str.length() >= min).isPresent();
         } catch (Exception e)
         {

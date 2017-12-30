@@ -2,24 +2,19 @@ package fr.maed.website.kwizzy.validation.rules.list.number;
 
 import fr.maed.website.kwizzy.validation.RuleInfo;
 import fr.maed.website.kwizzy.validation.impl.Form;
-import fr.maed.website.kwizzy.validation.rules.AbstractRule;
-import fr.maed.website.kwizzy.validation.rules.Rules;
-import org.apache.commons.lang3.StringUtils;
+import fr.maed.website.kwizzy.validation.rules.list.AbstractRule;
+import fr.maed.website.kwizzy.validation.rules.DefaultRules;
 
 import java.util.Optional;
 
 /**
- * Ref to {@link Rules#INT}<br/>
+ * Ref to {@link DefaultRules#INT}<br/>
  **/
 public class RuleInt extends AbstractRule {
 
-    public RuleInt(RuleInfo value) {
-        super(value);
-    }
-
     @Override
     public boolean isOkay(Form f) {
-        Optional<Integer> s = f.getInt(rule.getPath());
+        Optional<Integer> s = f.getInt(rule.getField());
         return s.isPresent();
     }
 }

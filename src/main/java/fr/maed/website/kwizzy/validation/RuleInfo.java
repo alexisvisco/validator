@@ -1,78 +1,54 @@
 package fr.maed.website.kwizzy.validation;
 
 import fr.maed.website.kwizzy.validation.rules.RuleObj;
-import fr.maed.website.kwizzy.validation.util.EnumsList;
+import fr.maed.website.kwizzy.validation.parser.RuleLexer;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.List;
 
 public class RuleInfo {
 
-    private String path;
-    private String rule;
-    private String[] explodedRule;
-    private EnumsList list;
-    private int paramsCount;
-    private String[] params= {};
-    private String ruleName;
-    private RuleObj obj;
+    private final String field;
+    private final RuleObj ruleObj;
+    private final String ruleName;
+    private final int paramsCount;
+    private final List<String> params;
 
-    public RuleInfo(String path, String rule, EnumsList list) {
-        this.path = path;
-        this.rule = rule;
-        this.explodedRule = rule.split(":");
-        this.list = list;
-        this.ruleName = explodedRule[0];
-        this.paramsCount = explodedRule.length == 1 ? 0 : explodedRule[1].split(",").length;
-        if (paramsCount > 0)
-            params = explodedRule[1].split(",");
-
+    public RuleInfo(String path, RuleObj ruleObj, RuleLexer.Token tok) {
+        this.field = path;
+        this.ruleName = ruleObj.getRuleName();
+        this.paramsCount = tok.getParams().size();
+        this.params = tok.getParams();
+        this.ruleObj = ruleObj;
     }
 
-    public String getRule() {
-        return rule;
+    public String getField() {
+        return field;
     }
 
-    public String[] getExplodedRule() {
-        return explodedRule;
-    }
-
-    public int getParamsCount() {
-        return paramsCount;
-    }
-
-    public String[] getParams() {
-        return params;
+    public RuleObj getRuleObj() {
+        return ruleObj;
     }
 
     public String getRuleName() {
         return ruleName;
     }
 
-    public Optional<RuleObj> getRuleObj() {
-        if (obj == null)
-        {
-            Optional<RuleObj> rule = list.getRule(this);
-            rule.ifPresent(ruleObj -> obj = ruleObj);
-            return rule;
-        }
-        return Optional.of(obj);
+    public int getParamsCount() {
+        return paramsCount;
     }
 
-    public String getPath() {
-        return path;
+    public List<String> getParams() {
+        return params;
     }
 
     @Override
     public String toString() {
         return "RuleInfo{" +
-                "path='" + path + '\'' +
-                ", rule='" + rule + '\'' +
-                ", explodedRule=" + Arrays.toString(explodedRule) +
-                ", paramsCount=" + paramsCount +
-                ", params=" + Arrays.toString(params) +
+                "field='" + field + '\'' +
+                ", ruleObj=" + ruleObj +
                 ", ruleName='" + ruleName + '\'' +
-                ", obj=" + obj +
+                ", paramsCount=" + paramsCount +
+                ", params=" + params +
                 '}';
     }
 }

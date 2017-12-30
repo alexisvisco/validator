@@ -2,15 +2,14 @@ package fr.maed.website.kwizzy.validation.rules.list.str;
 
 import fr.maed.website.kwizzy.validation.RuleInfo;
 import fr.maed.website.kwizzy.validation.impl.Form;
-import fr.maed.website.kwizzy.validation.rules.AbstractRule;
-import fr.maed.website.kwizzy.validation.rules.Rules;
-import org.apache.commons.lang3.StringUtils;
+import fr.maed.website.kwizzy.validation.rules.list.AbstractRule;
+import fr.maed.website.kwizzy.validation.rules.DefaultRules;
 import org.apache.commons.validator.routines.UrlValidator;
 
 import java.util.Optional;
 
 /**
- * Ref to {@link Rules#URL}<br/>
+ * Ref to {@link DefaultRules#URL}<br/>
  * Example:
  * <pre>
  * "http://foo.com/blah_blah"   -> true
@@ -26,13 +25,9 @@ import java.util.Optional;
  **/
 public class RuleUrl extends AbstractRule {
 
-    public RuleUrl(RuleInfo value) {
-        super(value);
-    }
-
     @Override
     public boolean isOkay(Form f) {
-        Optional<String> s = f.getString(rule.getPath());
+        Optional<String> s = f.getString(rule.getField());
         return s.filter(str -> UrlValidator.getInstance().isValid(str)).isPresent();
     }
 }

@@ -3,10 +3,13 @@ package util;
 import com.google.gson.Gson;
 import fr.maed.website.kwizzy.validation.Validator;
 import fr.maed.website.kwizzy.validation.impl.SparkForm;
+import fr.maed.website.kwizzy.validation.parser.RuleLexer;
 import org.json.JSONObject;
 import spark.Service;
 
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static org.junit.Assert.*;
 
@@ -50,4 +53,16 @@ public class UtilTest {
         }
         return port;
     }
-}
+
+    public static void testErrorLexer(String str)
+    {
+        try {
+            new RuleLexer(str).lex();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println();
+            return;
+        }
+        fail("Fail test for test " + str);
+
+    }}

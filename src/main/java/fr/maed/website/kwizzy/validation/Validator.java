@@ -2,43 +2,55 @@ package fr.maed.website.kwizzy.validation;
 
 import fr.maed.website.kwizzy.validation.exception.RuleParseException;
 import fr.maed.website.kwizzy.validation.impl.Form;
-import fr.maed.website.kwizzy.validation.rules.Rule;
+import fr.maed.website.kwizzy.validation.parser.RuleLexer;
+import fr.maed.website.kwizzy.validation.parser.RuleParser;
+import fr.maed.website.kwizzy.validation.rules.list.Rule;
 import fr.maed.website.kwizzy.validation.rules.RuleObj;
-import fr.maed.website.kwizzy.validation.rules.Rules;
 import fr.maed.website.kwizzy.validation.util.ConstructRule;
-import fr.maed.website.kwizzy.validation.util.EnumsList;
 
 import java.util.*;
 
 public class Validator {
 
-    private EnumsList enumsList = new EnumsList();
-    private final Form form;
+
+    private Form form;
     private Map<String, Rule> rules = new HashMap<>();
     private Map<String, String> errors = new HashMap<>();
 
+    public Validator() { }
+
     public Validator(Form form) {
         this.form = form;
-        enumsList.add(Arrays.asList(Rules.values()));
     }
 
-    public void addEnumRules(List<RuleObj> list) {
-        enumsList.add(list);
+    public void setForm(Form form) {
+        this.form = form;
     }
 
-    public void addEnumRules(RuleObj... list) {
-        enumsList.add(Arrays.asList(list));
-    }
-
-    public Validator addRule(String path, String definer) throws RuleParseException {
-        RuleInfo r = new RuleInfo(path, definer, enumsList);
-        Optional<RuleObj> ruleObj = r.getRuleObj();
-        if (!ruleObj.isPresent())
-            throw new RuleParseException(definer, path);
-        Optional<Rule> rule = ConstructRule.constructRule(ruleObj.get(), r);
-        if (!rule.isPresent())
-            throw new RuleParseException(path, definer);
-        rules.put(path, rule.get());
+    /**
+     *
+     * @param field where validator execute the rules
+     * @param rules a rule syntax is: name_rule[:param...][|second_name_rule(:param...)]+ <br>
+     * <pre>
+     * samples of rules: <br>
+     *    password -> confirm | min_length:5 <br>
+     *    email    -> unique:user, email| email <br>
+     *
+     * - All rules are lexed by {@link RuleLexer#lex()} <br>
+     * - All rules are transformed  by {@link RuleParser#getRuleInfo(String, String)}<br>
+     *</pre>
+     * @return this validator in order {@link Validator#addRule(String, String)}
+     * @throws RuleParseException
+     */
+    public Validator addRule(String field, String rules) throws RuleParseException {
+        List<RuleInfo> ruleInfos = RuleParser.getRuleInfo(field, rules);
+        for (RuleInfo ruleInfo : ruleInfos) {
+            Optional<Rule> rule = ConstructRule.constructRule(ruleInfo.getRuleObj());
+            if (!rule.isPresent())
+                throw new RuleParseException("Something wrong when construct Rule for rule name " + ruleInfo.getRuleName());
+            rule.get().injectRuleInfo(ruleInfo);
+            this.rules.put(field, rule.get());
+        }
         return this;
     }
 
@@ -50,10 +62,9 @@ public class Validator {
             }
             boolean okay = value.isOkay(form);
             RuleInfo ruleInfo = value.getRuleInfo();
-            Optional<RuleObj> ruleObj = ruleInfo.getRuleObj();
-            if (ruleObj.isPresent() && !okay)
-                errors.put(key,
-                        ruleObj.get().getDefaultMessage(ruleInfo));
+            RuleObj ruleObj = ruleInfo.getRuleObj();
+            if (!okay)
+                errors.put(key, ruleObj.getDefaultMessage(ruleInfo));
         });
         return errors;
     }
