@@ -85,7 +85,7 @@ public class RuleLexer {
                 ///
                 /// exception if no rule name at begin of new rule (after | or char 0)
                 ///
-                if (ruleName.u == 0) throw new RuleLexerException(LexerException.NEED_RULE, origin, i);
+                if (ruleName.u == -1) throw new RuleLexerException(LexerException.NEED_RULE, origin, i);
 
                 ///
                 /// If rule name is valid add it to currTok else if -> error
