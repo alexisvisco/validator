@@ -8,8 +8,8 @@ Import this in your code base: [SparkForm.java](https://github.com/AlexisVisco/V
 
  post("/test/", (r, q) -> {
      Map<String, String> check = new Validator(new SparkForm(r))
-             .addRule("title -> max_length:100|min_length:(10)")
-             .addRule("price -> range:0,99999")
+             .addRule("title -> max_length: 100 | min_length: 10")
+             .addRule("price -> range: 0, 99999")
              .addRule("website -> url")
              .addRule("email -> email")
              .addRule("tags -> json_arr|diff:(:1)", new JSONArray().put("hey").put("this is a replacement").toString())
