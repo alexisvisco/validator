@@ -12,7 +12,7 @@ Import this in your code base: [SparkForm.java](https://github.com/AlexisVisco/V
              .addRule("price -> range: 0, 99999")
              .addRule("website -> url")
              .addRule("email -> email")
-             .addRule("tags -> json_arr|diff:(:1)", new JSONArray().put("hey").put("this is a replacement").toString())
+             .addRule("tags -> json_arr | diff: (:1)", new JSONArray().put("hey").put("this is a replacement").toString())
              .check();
      if (!check.isEmpty()) {
          return "Somes errors, check is key/value where key=field and value=error message";
