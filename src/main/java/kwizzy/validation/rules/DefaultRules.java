@@ -3,19 +3,14 @@ package kwizzy.validation.rules;
 import kwizzy.validation.rules.list.Rule;
 import kwizzy.validation.rules.list.js.RuleJsArray;
 import kwizzy.validation.rules.list.js.RuleJsObj;
-import kwizzy.validation.rules.list.other.RuleBool;
-import kwizzy.validation.rules.list.other.RuleDiff;
-import kwizzy.validation.rules.list.other.RuleMax;
-import kwizzy.validation.rules.list.other.RuleMin;
-import kwizzy.validation.rules.list.number.*;
-import kwizzy.validation.rules.list.str.*;
+import kwizzy.validation.rules.list.other.*;
 import kwizzy.validation.rules.list.number.*;
 import kwizzy.validation.rules.list.str.*;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public enum DefaultRules implements RuleObj {
+public enum DefaultRules implements RuleDescriptor {
 
     /// STRING RULES
     ALPHA(RuleAlpha.class, "alpha", 0, ":attr is not a alpha string."),
@@ -45,7 +40,10 @@ public enum DefaultRules implements RuleObj {
     MAX(RuleMax.class, "max_length", 1, ":attr must be lesser than :1 length."),
     MIN(RuleMin.class, "min_length", 1, ":attr must be at least of :1 length."),
     DIFF(RuleDiff.class, "diff", 1, ":attr is same as :1."),
-    BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),;
+    BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),
+    OPTIONAL(RuleOptional.class, "optional", 0, ":attr is optional."),
+
+    ;
 
     private Class<? extends Rule> rule;
     private String defaultMessage;
@@ -96,9 +94,9 @@ public enum DefaultRules implements RuleObj {
                 '}';
     }
 
-    public static Optional<RuleObj> getByRuleName(String ruleName) {
+    public static Optional<RuleDescriptor> getByRuleName(String ruleName) {
         return Stream.of(DefaultRules.values())
                 .filter(e -> e.getRuleName().equals(ruleName))
-                .map(e -> (RuleObj)e).findFirst();
+                .map(e -> (RuleDescriptor)e).findFirst();
     }
 }

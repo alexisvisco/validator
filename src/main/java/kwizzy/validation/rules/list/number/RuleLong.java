@@ -8,6 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#LONG}<br/>
+ * Usage: addRule("field", "long") <br/>
  **/
 public class RuleLong extends AbstractRule {
 

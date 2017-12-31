@@ -13,9 +13,10 @@ public interface RulesMessages {
     void setMessageFor(String ruleName, String message);
 
     default String replaceInfos(String str, RuleInfo r) {
+        System.out.println("HEy?");
         String s = str.replace(":attr", r.getField());
         for (int i = 0; i < r.getParamsCount(); i++)
-            s = s.replace(":" + (i + 1), s);
+            s = s.replace(":" + (i + 1), r.getParams().get(i));
         return s;
     }
 }

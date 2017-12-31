@@ -1,7 +1,7 @@
 package kwizzy.validation.config;
 
 import kwizzy.validation.config.language.LanguageList;
-import kwizzy.validation.rules.RuleObj;
+import kwizzy.validation.rules.RuleDescriptor;
 import kwizzy.validation.util.RuleList;
 
 import java.util.List;
@@ -14,12 +14,13 @@ public class ValidatorConfig {
 
     public RuleList ruleList = new RuleList();
     public LanguageList languageList = new LanguageList();
+    public String defaultLang = "en";
 
     private ValidatorConfig() { }
 
     public List<String> getAllRulesNames()
     {
-        return ruleList.stream().map(RuleObj::getRuleName).collect(Collectors.toList());
+        return ruleList.stream().map(RuleDescriptor::getRuleName).collect(Collectors.toList());
     }
 
     public static ValidatorConfig cfg() {

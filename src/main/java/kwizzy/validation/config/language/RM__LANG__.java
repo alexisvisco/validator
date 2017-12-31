@@ -3,7 +3,7 @@ package kwizzy.validation.config.language;
 import kwizzy.validation.RuleInfo;
 import kwizzy.validation.exceptions.LanguageNotFoundException;
 import kwizzy.validation.rules.DefaultRules;
-import kwizzy.validation.rules.RuleObj;
+import kwizzy.validation.rules.RuleDescriptor;
 import kwizzy.validation.config.ValidatorConfig;
 
 import java.util.Optional;
@@ -35,10 +35,10 @@ class RM__LANG__ implements RulesMessages {
         ListRules__LANG__.getRuleByName(ruleName).ifPresent(e -> e.message = msg);
     }
 
-    public static Optional<RuleObj> getByRuleName(String ruleName) {
+    public static Optional<RuleDescriptor> getByRuleName(String ruleName) {
         return Stream.of(DefaultRules.values())
                 .filter(e -> e.getRuleName().equals(ruleName))
-                .map(e -> (RuleObj)e).findFirst();
+                .map(e -> (RuleDescriptor)e).findFirst();
     }
 
     private enum ListRules__LANG__ {

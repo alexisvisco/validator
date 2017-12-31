@@ -1,7 +1,7 @@
 package kwizzy.validation.config.language;
 
 import com.google.common.base.CaseFormat;
-import kwizzy.validation.rules.RuleObj;
+import kwizzy.validation.rules.RuleDescriptor;
 import kwizzy.validation.config.ValidatorConfig;
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,7 +11,7 @@ public class ConstructRMLang {
             "import RuleInfo;\n" +
             "import LanguageNotFoundException;\n" +
             "import DefaultRules;\n" +
-            "import RuleObj;\n" +
+            "import RuleDescriptor;\n" +
             "\n" +
             "import java.util.Optional;\n" +
             "import java.util.stream.Stream;\n" +
@@ -44,10 +44,10 @@ public class ConstructRMLang {
             "        ListRules__LANG__.getRuleByName(ruleName).ifPresent(e -> e.message = msg);\n" +
             "    }\n" +
             "\n" +
-            "    public static Optional<RuleObj> getByRuleName(String ruleName) {\n" +
+            "    public static Optional<RuleDescriptor> getByRuleName(String ruleName) {\n" +
             "        return Stream.of(DefaultRules.values())\n" +
             "                .filter(e -> e.getRuleName().equals(ruleName))\n" +
-            "                .map(e -> (RuleObj)e).findFirst();\n" +
+            "                .map(e -> (RuleDescriptor)e).findFirst();\n" +
             "    }\n" +
             "    \n" +
             "    private enum ListRules__LANG__ {\n" +
@@ -83,7 +83,7 @@ public class ConstructRMLang {
         buildedClass = CLASS_PRESET.replace("__LANG__", capitalizedLang).replace("__LANG_MIN__", lang);
         StringBuilder enums = new StringBuilder();
         ;
-        for (RuleObj dr : ValidatorConfig.cfg().ruleList)
+        for (RuleDescriptor dr : ValidatorConfig.cfg().ruleList)
             enums.append(ENUM_PRESET
                     .replace("__NAME_ENUM_RULE__", CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, dr.getRuleName()))
                     .replace("__RULE_NAME__", dr.getRuleName())

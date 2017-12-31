@@ -1,19 +1,20 @@
 package kwizzy.validation;
 
-import kwizzy.validation.rules.RuleObj;
+import kwizzy.validation.rules.RuleDescriptor;
 import kwizzy.validation.parser.RuleLexer;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RuleInfo {
 
     private final String field;
-    private final RuleObj ruleObj;
+    private final RuleDescriptor ruleObj;
     private final String ruleName;
     private final int paramsCount;
     private final List<String> params;
 
-    public RuleInfo(String path, RuleObj ruleObj, RuleLexer.Token tok) {
+    public RuleInfo(String path, RuleDescriptor ruleObj, RuleLexer.Token tok) {
         this.field = path;
         this.ruleName = ruleObj.getRuleName();
         this.paramsCount = tok.getParams().size();
@@ -21,11 +22,19 @@ public class RuleInfo {
         this.ruleObj = ruleObj;
     }
 
+    public RuleInfo(String path, RuleDescriptor rule, String... params) {
+        this.field = path;
+        this.ruleName = rule.getRuleName();
+        this.paramsCount = params.length;
+        this.params = Arrays.asList(params);
+        this.ruleObj = rule;
+    }
+
     public String getField() {
         return field;
     }
 
-    public RuleObj getRuleObj() {
+    public RuleDescriptor getRuleObj() {
         return ruleObj;
     }
 

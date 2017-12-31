@@ -1,27 +1,33 @@
 package kwizzy.validation;
 
+import kwizzy.validation.config.language.RulesMessages;
 import kwizzy.validation.exceptions.LanguageNotFoundException;
 import kwizzy.validation.exceptions.RuleParseException;
 import kwizzy.validation.impl.Form;
 import kwizzy.validation.parser.RuleLexer;
 import kwizzy.validation.parser.RuleParser;
+import kwizzy.validation.rules.RuleDescriptor;
 import kwizzy.validation.rules.list.Rule;
 import kwizzy.validation.util.ConstructRule;
-import kwizzy.validation.config.ValidatorConfig;
 
 import java.util.*;
+
+import static kwizzy.validation.config.ValidatorConfig.cfg;
 
 public class Validator {
 
 
     private Form form;
-    private Map<String, Rule> rules = new HashMap<>();
+    private Map<String, List<Rule>> rules = new HashMap<>();
     private Map<String, String> errors = new HashMap<>();
-    private String lang = "en";
+    private RulesMessages messages;
 
-    public Validator() { }
+    public Validator() {
+        setLang(cfg().defaultLang);
+    }
 
     public Validator(Form form) {
+        this();
         this.form = form;
     }
 
@@ -29,19 +35,26 @@ public class Validator {
         this.form = form;
     }
 
+    public void setLang(String lang) {
+        try {
+            messages = cfg().languageList.getByLanguage(lang);
+        } catch (LanguageNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
-     *
      * @param field where validator execute the rules
-     * @param rules a rule syntax is: name_rule[:param...][|second_name_rule(:param...)]+ <br>
-     * <pre>
-     * samples of rules: <br>
-     *    password -> confirm | min_length:5 <br>
-     *    email    -> unique:user, email| email <br>
+     * @param rules a rule syntax is: name_rule[:param...][|second_name_rule[:param...]]+ <br>
+     *              <pre>
+     *              samples of rules: <br>
+     *                 password -> confirm | min_length:5 <br>
+     *                 email    -> unique:user, email| email <br>
      *
-     * - All rules are lexed by {@link RuleLexer#lex()} <br>
-     * - All rules are transformed  by {@link RuleParser#getRuleInfo(String, String)}<br>
-     *</pre>
-     * @return this validator in order {@link Validator#addRule(String, String)}
+     *              - All rules are lexed by {@link RuleLexer#lex()} <br>
+     *              - All rules are transformed  by {@link RuleParser#getRuleInfo(String, String)}<br>
+     *              </pre>
+     * @return this validator in order to chain {@link Validator#addRule(String, String)}
      * @throws RuleParseException
      */
     public Validator addRule(String field, String rules) throws RuleParseException {
@@ -51,34 +64,38 @@ public class Validator {
             if (!rule.isPresent())
                 throw new RuleParseException("Something wrong when construct Rule for rule name " + ruleInfo.getRuleName());
             rule.get().injectRuleInfo(ruleInfo);
-            this.rules.put(field, rule.get());
+            this.rules.computeIfAbsent(field, k -> new ArrayList<>());
+            this.rules.get(field).add(rule.get());
         }
         return this;
     }
 
+    public void addCustomRule(String field, RuleDescriptor rule, String... params) throws RuleParseException {
+        RuleInfo ruleInfo = new RuleInfo(field, rule, params);
+        Optional<Rule> ruleC = ConstructRule.constructRule(ruleInfo.getRuleObj());
+        if (!ruleC.isPresent())
+            throw new RuleParseException("Something wrong when construct Rule for rule name " + ruleInfo.getRuleName());
+        ruleC.get().injectRuleInfo(ruleInfo);
+        this.rules.computeIfAbsent(field, k -> new ArrayList<>());
+        this.rules.get(field).add(ruleC.get());
+    }
+
     public Map<String, String> check() {
-        rules.forEach((key, value) -> {
-            if (!form.getString(key).isPresent()) {
-                errors.put(key, key + " is undefined.");
-                return ;
+        rules.forEach((field, value) -> {
+            boolean optional = value.stream().anyMatch(e -> e.getRuleInfo().getRuleName().equals("optional"));
+            if (!form.getString(field).isPresent() && !optional) {
+                errors.put(field, field + " is undefined.");
+                return;
             }
-            boolean okay = value.isOkay(form);
-            RuleInfo ruleInfo = value.getRuleInfo();
-            Optional<String> messageFor = Optional.empty();
-            try {
-                messageFor = ValidatorConfig.cfg().languageList.getByLanguage(lang).getMessageFor(ruleInfo.getRuleName(), ruleInfo);
-            } catch (LanguageNotFoundException e) {
-                e.printStackTrace();
-                System.exit(1);
-            }
-            if (messageFor.isPresent() && !okay)
-                errors.put(key, messageFor.get());
+            value.stream()
+                    .filter(rule -> !rule.isOkay(form)).map(Rule::getRuleInfo)
+                    .findFirst().ifPresent(rule -> addError(field, rule));
         });
         return errors;
     }
 
-    public void addCustomRule(String path, Rule rule) {
-        rules.put(path, rule);
+    private void addError(String field, RuleInfo ruleInfo) {
+        Optional<String> msg = messages.getMessageFor(ruleInfo.getRuleName(), ruleInfo);
+        msg.ifPresent(s -> errors.put(field, s));
     }
-
 }

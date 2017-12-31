@@ -9,6 +9,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#JS_OBJ}<br/>
+ * Usage: addRule("field", "json_arr") <br/>
  * Example:
  * <pre>
  * "[]"         -> true

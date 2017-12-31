@@ -8,6 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#FLOAT}<br/>
+ * Usage: addRule("field", "float") <br/>
  **/
 public class RuleFloat extends AbstractRule {
 

@@ -2,7 +2,7 @@ package kwizzy.validation.parser;
 
 import kwizzy.validation.RuleInfo;
 import kwizzy.validation.exceptions.RuleParseException;
-import kwizzy.validation.rules.RuleObj;
+import kwizzy.validation.rules.RuleDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class RuleParser {
         List<RuleInfo> lst = new ArrayList<>();
         List<RuleLexer.Token> lex = new RuleLexer(origin).lex();
         for (RuleLexer.Token tok : lex) {
-            Optional<RuleObj> rule = cfg().ruleList.getRule(tok.getParams().size(), tok.getRuleName().toString());
+            Optional<RuleDescriptor> rule = cfg().ruleList.getRule(tok.getParams().size(), tok.getRuleName().toString());
             if (!rule.isPresent())
                 throw new RuleParseException(origin, field);
             lst.add(new RuleInfo(field, rule.get(), tok));

@@ -13,6 +13,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#RANGE}<br/>
+ * Usage: addRule("field", "range:int min, int max") <br/>
  * Example:
  * <pre>
  * "123"  12,124  -> true

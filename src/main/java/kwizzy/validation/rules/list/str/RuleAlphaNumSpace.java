@@ -9,14 +9,15 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#ALPHA_NUM_SPACE}<br/>
+ * Usage: addRule("field", "alpha_num_space") <br/>
  * Example:
  * <pre>
- * "123abc"  -> true
- * "123"     -> true
- * "  "      -> true
+ * "123abc"     -> true
+ * "123"        -> true
+ * "  "         -> true
  * "  abc"      -> true
- * ".abc"      -> false
- * "@#$%^&*("      -> false
+ * ".abc"       -> false
+ * "@#$%^&*("   -> false
  * "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"  -> true
  * </pre>
  **/

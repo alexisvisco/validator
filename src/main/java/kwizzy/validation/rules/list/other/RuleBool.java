@@ -7,7 +7,8 @@ import kwizzy.validation.rules.DefaultRules;
 import java.util.Optional;
 
 /**
- * Ref to {@link DefaultRules#DIFF}<br/>
+ * Ref to {@link DefaultRules#BOOL}<br/>
+ * Usage: addRule("field", "bool") <br/>
  * Example:
  * <pre>
  * "true"   -> true

@@ -8,6 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#DIFF}<br/>
+ * Usage: addRule("field", "diff:string str") <br/>
  * Example:
  * <pre>
  * "123" "123"    -> false

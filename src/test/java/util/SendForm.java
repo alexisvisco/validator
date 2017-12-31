@@ -19,9 +19,12 @@ public class SendForm {
         return null;
     }
 
+
     public static JSONObject with(String uuid, Map<String, Object> body, int port)
     {
         try {
+            if (body.isEmpty())
+                return Unirest.post("http://localhost:" + port + "/"+ uuid +"/").asJson().getBody().getObject();
             return Unirest.post("http://localhost:" + port + "/"+ uuid +"/").fields(body).asJson().getBody().getObject();
         } catch (UnirestException e) {
             e.printStackTrace();

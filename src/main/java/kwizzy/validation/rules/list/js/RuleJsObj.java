@@ -10,6 +10,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#JS_OBJ}<br/>
+ * Usage: addRule("field", "json") <br/>
  * Example:
  * <pre>
  * "{}"                         -> true
