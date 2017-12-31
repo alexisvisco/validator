@@ -17,7 +17,7 @@ public class RuleLesserTest {
     @Test
     public final void testRuleLesserNotOk() throws Exception {
         int port = UtilTest.launchWebServer("lesser:5");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("12", port, false);
         UtilTest.testIt("12a", port, false);
         UtilTest.testIt("678345678903456789234567893456789023456789034567890", port, false);

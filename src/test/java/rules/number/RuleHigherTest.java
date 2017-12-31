@@ -18,7 +18,7 @@ public class RuleHigherTest {
     @Test
     public final void testRuleHigherNotOk() throws Exception {
         int port = UtilTest.launchWebServer("higher:5");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("12a", port, false);
         UtilTest.testIt("4", port, false);
         UtilTest.testIt("3", port, false);

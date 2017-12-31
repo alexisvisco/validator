@@ -20,7 +20,7 @@ public class RuleAlphaNumSpaceTest {
     @Test
     public final void testRuleAlphaNotNumSpaceOk() throws Exception {
         int port = UtilTest.launchWebServer("alpha_num_space");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("9*123 ", port, false);
         UtilTest.testIt("abc. ", port, false);
         UtilTest.testIt("[]", port, false);

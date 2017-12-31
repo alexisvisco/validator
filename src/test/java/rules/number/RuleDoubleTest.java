@@ -20,7 +20,7 @@ public class RuleDoubleTest {
     @Test
     public final void testRuleDoubleNotOk() throws Exception {
         int port = UtilTest.launchWebServer("double");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("9*123 ", port, false);
         UtilTest.testIt("9.34567%", port, false);
         UtilTest.testIt("-  123. ", port, false);

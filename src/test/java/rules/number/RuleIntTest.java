@@ -17,7 +17,7 @@ public class RuleIntTest {
     @Test
     public final void testRuleIntNotOk() throws Exception {
         int port = UtilTest.launchWebServer("int");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("9*123 ", port, false);
         UtilTest.testIt("-  123. ", port, false);
         UtilTest.testIt("123 ", port, false);

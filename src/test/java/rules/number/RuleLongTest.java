@@ -17,7 +17,7 @@ public class RuleLongTest {
     @Test
     public final void testRuleLongNotOk() throws Exception {
         int port = UtilTest.launchWebServer("long");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("9*123 ", port, false);
         UtilTest.testIt("-  123. ", port, false);
         UtilTest.testIt("123 ", port, false);

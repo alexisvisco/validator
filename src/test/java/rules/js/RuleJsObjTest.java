@@ -22,7 +22,7 @@ public class RuleJsObjTest {
     @Test
     public final void testRuleJsObjNotOk() throws Exception {
         int port = UtilTest.launchWebServer("json");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("{ ", port, false);
         UtilTest.testIt("}, \"test\": 123", port, false);
         UtilTest.testIt("[]", port, false);

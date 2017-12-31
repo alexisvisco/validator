@@ -20,7 +20,7 @@ public class RuleRangeTest {
     @Test
     public final void testRuleRangeNotOk() throws Exception {
         int port = UtilTest.launchWebServer("range:5, 10");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("4", port, false);
         UtilTest.testIt("4.45678", port, false);
         UtilTest.testIt("11", port, false);

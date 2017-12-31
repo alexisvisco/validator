@@ -20,7 +20,7 @@ public class RuleFloatTest {
     @Test
     public final void testRuleFloatNotOk() throws Exception {
         int port = UtilTest.launchWebServer("float");
-        UtilTest.testIt("!@#$%^&****()_+≠–«‘[", port, false);
+        UtilTest.testIt("!@#$%^&", port, false);
         UtilTest.testIt("9*123 ", port, false);
         UtilTest.testIt("9.34567%", port, false);
         UtilTest.testIt("-  123. ", port, false);
