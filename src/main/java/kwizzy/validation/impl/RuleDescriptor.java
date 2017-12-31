@@ -1,7 +1,4 @@
-package kwizzy.validation.rules;
-
-import kwizzy.validation.impl.Form;
-import kwizzy.validation.rules.list.Rule;
+package kwizzy.validation.impl;
 
 public interface RuleDescriptor {
 

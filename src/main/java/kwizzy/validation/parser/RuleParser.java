@@ -2,7 +2,7 @@ package kwizzy.validation.parser;
 
 import kwizzy.validation.RuleInfo;
 import kwizzy.validation.exceptions.RuleParseException;
-import kwizzy.validation.rules.RuleDescriptor;
+import kwizzy.validation.impl.RuleDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;

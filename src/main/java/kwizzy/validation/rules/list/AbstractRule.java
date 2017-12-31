@@ -1,6 +1,7 @@
 package kwizzy.validation.rules.list;
 
 import kwizzy.validation.RuleInfo;
+import kwizzy.validation.impl.Rule;
 
 public abstract class AbstractRule implements Rule {
 

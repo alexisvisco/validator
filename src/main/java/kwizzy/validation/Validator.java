@@ -1,13 +1,13 @@
 package kwizzy.validation;
 
-import kwizzy.validation.config.language.RulesMessages;
+import kwizzy.validation.impl.RulesMessages;
 import kwizzy.validation.exceptions.LanguageNotFoundException;
 import kwizzy.validation.exceptions.RuleParseException;
 import kwizzy.validation.impl.Form;
 import kwizzy.validation.parser.RuleLexer;
 import kwizzy.validation.parser.RuleParser;
-import kwizzy.validation.rules.RuleDescriptor;
-import kwizzy.validation.rules.list.Rule;
+import kwizzy.validation.impl.RuleDescriptor;
+import kwizzy.validation.impl.Rule;
 import kwizzy.validation.util.ConstructRule;
 
 import java.util.*;

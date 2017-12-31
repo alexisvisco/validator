@@ -1,7 +1,7 @@
 package kwizzy.validation.config;
 
 import kwizzy.validation.config.language.LanguageList;
-import kwizzy.validation.rules.RuleDescriptor;
+import kwizzy.validation.impl.RuleDescriptor;
 import kwizzy.validation.util.RuleList;
 
 import java.util.List;

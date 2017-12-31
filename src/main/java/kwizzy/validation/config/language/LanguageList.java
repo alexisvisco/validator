@@ -1,6 +1,7 @@
 package kwizzy.validation.config.language;
 
 import kwizzy.validation.exceptions.LanguageNotFoundException;
+import kwizzy.validation.impl.RulesMessages;
 
 import java.util.ArrayList;
 import java.util.Optional;

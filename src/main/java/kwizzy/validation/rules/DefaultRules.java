@@ -1,6 +1,7 @@
 package kwizzy.validation.rules;
 
-import kwizzy.validation.rules.list.Rule;
+import kwizzy.validation.impl.RuleDescriptor;
+import kwizzy.validation.impl.Rule;
 import kwizzy.validation.rules.list.js.RuleJsArray;
 import kwizzy.validation.rules.list.js.RuleJsObj;
 import kwizzy.validation.rules.list.other.*;
@@ -42,6 +43,7 @@ public enum DefaultRules implements RuleDescriptor {
     DIFF(RuleDiff.class, "diff", 1, ":attr is same as :1."),
     BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),
     OPTIONAL(RuleOptional.class, "optional", 0, ":attr is optional."),
+    UNIQUE(RuleUnique.class, "unique", 2, ":attr already exist."),
 
     ;
 

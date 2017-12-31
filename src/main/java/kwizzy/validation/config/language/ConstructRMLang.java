@@ -1,25 +1,27 @@
 package kwizzy.validation.config.language;
 
 import com.google.common.base.CaseFormat;
-import kwizzy.validation.rules.RuleDescriptor;
+import kwizzy.validation.impl.RuleDescriptor;
 import kwizzy.validation.config.ValidatorConfig;
 import org.apache.commons.lang3.StringUtils;
 
 public class ConstructRMLang {
 
-    private static final String CLASS_PRESET = "\n" +
-            "import RuleInfo;\n" +
-            "import LanguageNotFoundException;\n" +
-            "import DefaultRules;\n" +
-            "import RuleDescriptor;\n" +
+    private static final String CLASS_PRESET = "package kwizzy.validation.config.language;\n" +
+            "\n" +
+            "import kwizzy.validation.RuleInfo;\n" +
+            "import kwizzy.validation.exceptions.LanguageNotFoundException;\n" +
+            "import kwizzy.validation.impl.RulesMessages;\n" +
+            "import kwizzy.validation.rules.DefaultRules;\n" +
+            "import kwizzy.validation.impl.RuleDescriptor;\n" +
             "\n" +
             "import java.util.Optional;\n" +
             "import java.util.stream.Stream;\n" +
             "\n" +
-            "import static ValidatorConfig.cfg;\n" +
+            "import static kwizzy.validation.config.ValidatorConfig.*;\n" +
             "\n" +
             "class RMessages__LANG__ implements RulesMessages {\n" +
-            "    \n" +
+            "\n" +
             "    @Override\n" +
             "    public String getLang() {\n" +
             "        return \"__LANG_MIN__\";\n" +
@@ -49,23 +51,23 @@ public class ConstructRMLang {
             "                .filter(e -> e.getRuleName().equals(ruleName))\n" +
             "                .map(e -> (RuleDescriptor)e).findFirst();\n" +
             "    }\n" +
-            "    \n" +
+            "\n" +
             "    private enum ListRules__LANG__ {\n" +
-            "        \n" +
-            "__ENUM_HERE__\n" +
+            "\n" +
+            "        __ENUM_HERE__\n" +
             "        ;\n" +
             "        String message;\n" +
             "        String ruleName;\n" +
-            "        Int params;\n" +
+            "        int params;\n" +
             "\n" +
             "        ListRules__LANG__() {}\n" +
             "\n" +
-            "        ListRules__LANG__(String message, Int params, String ruleName) {\n" +
+            "        ListRules__LANG__(String message, int params, String ruleName) {\n" +
             "            this.message = message;\n" +
             "            this.ruleName = ruleName;\n" +
             "            this.params = params;\n" +
             "        }\n" +
-            "        \n" +
+            "\n" +
             "        private static Optional<ListRules__LANG__> getRuleByName(String rn) {\n" +
             "            return Stream.of(ListRules__LANG__.values())\n" +
             "                    .filter(e -> e.ruleName.equals(rn))\n" +

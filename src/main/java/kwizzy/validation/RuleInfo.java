@@ -1,6 +1,6 @@
 package kwizzy.validation;
 
-import kwizzy.validation.rules.RuleDescriptor;
+import kwizzy.validation.impl.RuleDescriptor;
 import kwizzy.validation.parser.RuleLexer;
 
 import java.util.Arrays;

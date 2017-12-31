@@ -1,4 +1,4 @@
-package kwizzy.validation.rules.list;
+package kwizzy.validation.impl;
 
 import kwizzy.validation.RuleInfo;
 import kwizzy.validation.impl.Form;

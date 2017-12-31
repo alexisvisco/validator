@@ -2,14 +2,16 @@ package kwizzy.validation.config.language;
 
 import kwizzy.validation.RuleInfo;
 import kwizzy.validation.exceptions.LanguageNotFoundException;
+import kwizzy.validation.impl.RulesMessages;
 import kwizzy.validation.rules.DefaultRules;
-import kwizzy.validation.rules.RuleDescriptor;
-import kwizzy.validation.config.ValidatorConfig;
+import kwizzy.validation.impl.RuleDescriptor;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
-class RM__LANG__ implements RulesMessages {
+import static kwizzy.validation.config.ValidatorConfig.*;
+
+class RMessages__LANG__ implements RulesMessages {
 
     @Override
     public String getLang() {
@@ -21,7 +23,7 @@ class RM__LANG__ implements RulesMessages {
         Optional<ListRules__LANG__> o = ListRules__LANG__.getRuleByName(ruleName);
         if (!o.isPresent()) {
             try {
-                return ValidatorConfig.cfg().languageList.getByLanguage("en").getMessageFor(ruleName, r);
+                return cfg().languageList.getByLanguage("en").getMessageFor(ruleName, r);
             } catch (LanguageNotFoundException e) {
                 e.printStackTrace();
             }
@@ -42,17 +44,19 @@ class RM__LANG__ implements RulesMessages {
     }
 
     private enum ListRules__LANG__ {
-        // __NAME_ENUM_RULE__("__RULE_NAME__", "__DEFAULT_MESSAGE"),
+
         __ENUM_HERE__
         ;
         String message;
         String ruleName;
+        int params;
 
         ListRules__LANG__() {}
 
-        ListRules__LANG__(String message, String ruleName) {
+        ListRules__LANG__(String message, int params, String ruleName) {
             this.message = message;
             this.ruleName = ruleName;
+            this.params = params;
         }
 
         private static Optional<ListRules__LANG__> getRuleByName(String rn) {

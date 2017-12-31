@@ -1,6 +1,7 @@
 package impl;
 
 import kwizzy.validation.impl.Form;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Request;
 import javax.servlet.http.Part;
@@ -98,5 +99,11 @@ public class SparkForm implements Form {
         } catch (Exception e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public boolean exist(String collection, String field, String value) {
+        // test class so i assume that collection is user and field email
+        return RandomUser.randoms.stream().anyMatch(e -> e.email.equals(value));
     }
 }

@@ -1,7 +1,7 @@
 package kwizzy.validation.util;
 
 import kwizzy.validation.rules.DefaultRules;
-import kwizzy.validation.rules.RuleDescriptor;
+import kwizzy.validation.impl.RuleDescriptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

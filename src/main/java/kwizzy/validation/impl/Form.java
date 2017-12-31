@@ -18,4 +18,6 @@ public interface Form {
     Optional<String> getString(String key);
 
     Optional<Part> getPart(String key);
+
+    boolean exist(String collection, String field, String value);
 }
