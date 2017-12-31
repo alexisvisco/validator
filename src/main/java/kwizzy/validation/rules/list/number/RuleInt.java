@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#INT}<br/>
- * Usage: addRule("field", "int") <br/>
+ * Usage: addRule("field -> int") <br/>
  **/
 public class RuleInt extends AbstractRule {
 

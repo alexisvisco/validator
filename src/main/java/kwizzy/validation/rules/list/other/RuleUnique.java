@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#UNIQUE}<br/>
- * Usage: addRule("field", "unique: string collection, string field") <br/>
+ * Usage: addRule("field -> unique: string collection, string field") <br/>
  * This rule check in the base (implemented by Form) if
  * in the current collection where field = field something exist.
  * If exist return false because this rule return only true if nothing

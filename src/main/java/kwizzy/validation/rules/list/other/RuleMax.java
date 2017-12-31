@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#MAX}<br/>
- * Usage: addRule("field", "max_length:int n") <br/>
+ * Usage: addRule("field -> max_length:int n") <br/>
  * Example:
  * <pre>
  * "123" 3    -> true

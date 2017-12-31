@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Optional;
 /**
  * Ref to {@link DefaultRules#NUMERIC}<br/>
- * Usage: addRule("field", "numeric") <br/>
+ * Usage: addRule("field -> numeric") <br/>
  * Example:
  * <pre>
  * "abc"    -> false

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#ALPHA}<br/>
- * Usage: addRule("field", "confirm") <br/>
+ * Usage: addRule("field -> confirm") <br/>
  * Example:
  * <pre>
  * ""        -> false

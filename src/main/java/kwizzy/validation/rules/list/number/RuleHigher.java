@@ -13,7 +13,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#HIGHER}<br/>
- * Usage: addRule("field", "higher:int i") <br/>
+ * Usage: addRule("field -> higher:int i") <br/>
  * Example:
  * <pre>
  * "123"  124  -> false

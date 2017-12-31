@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#URL}<br/>
- * Usage: addRule("field", "url") <br/>
+ * Usage: addRule("field -> url") <br/>
  * Example:
  * <pre>
  * "http://foo.com/blah_blah"                           -> true

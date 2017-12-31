@@ -13,7 +13,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#LESSER}<br/>
- * Usage: addRule("field", "lesser:int i") <br/>
+ * Usage: addRule("field -> lesser:int i") <br/>
  * Example:
  * <pre>
  * "123"  124  -> true

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#BLANK}<br/>
- * Usage: addRule("field", "blank") <br/>
+ * Usage: addRule("field -> blank") <br/>
  * Example:
  * <pre>
  * "   "     -> true

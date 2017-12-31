@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#ALPHA_NUM_SPACE}<br/>
- * Usage: addRule("field", "alpha_num_space") <br/>
+ * Usage: addRule("field -> alpha_num_space") <br/>
  * Example:
  * <pre>
  * "123abc"     -> true

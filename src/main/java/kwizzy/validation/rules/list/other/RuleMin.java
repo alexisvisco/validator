@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#MIN}<br/>
- * Usage: addRule("field", "min_length:int n") <br/>
+ * Usage: addRule("field -> min_length:int n") <br/>
  * Example:
  * <pre>
  * "123"  3    -> true

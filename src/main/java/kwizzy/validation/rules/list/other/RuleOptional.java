@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#OPTIONAL}<br/>
- * Usage: addRule("field", "optional") <br/>
+ * Usage: addRule("field -> optional") <br/>
  * This rule is used to set a field as optional.
  * If no value precised, the field will be ignored.
  **/

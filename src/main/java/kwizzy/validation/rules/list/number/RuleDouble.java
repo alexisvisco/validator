@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#DOUBLE}<br/>
- * Usage: addRule("field", "double") <br/>
+ * Usage: addRule("field -> double") <br/>
  **/
 public class RuleDouble extends AbstractRule {
 

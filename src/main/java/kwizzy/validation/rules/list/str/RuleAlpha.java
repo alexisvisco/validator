@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#ALPHA}<br/>
- * Usage: addRule("field", "alpha") <br/>
+ * Usage: addRule("field -> alpha") <br/>
  * Example:
  * <pre>
  * ""        -> false

@@ -34,7 +34,7 @@ public class UtilTest {
                 if (sparkForm.getString("test").isPresent())
                     System.out.println("Test for value: `" + sparkForm.getString("test").get() + "`.\n");
                 Map<String, String> check = new Validator(sparkForm)
-                        .addRule("test", ruleToTest)
+                        .addRule("test -> :1", ruleToTest)
                         .check();
 
                 return new JSONObject(new Gson().toJson(check));

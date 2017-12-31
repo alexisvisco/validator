@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#EMAIL}<br/>
- * Usage: addRule("field", "email") <br/>
+ * Usage: addRule("field -> email") <br/>
  * Example:
  * <pre>
  * "test@"             -> false

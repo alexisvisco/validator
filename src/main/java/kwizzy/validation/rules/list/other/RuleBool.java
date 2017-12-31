@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#BOOL}<br/>
- * Usage: addRule("field", "bool") <br/>
+ * Usage: addRule("field -> bool") <br/>
  * Example:
  * <pre>
  * "true"   -> true

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Ref to {@link DefaultRules#NOT_EMPTY}<br/>
- * Usage: addRule("field", "not_empty") <br/>
+ * Usage: addRule("field -> not_empty") <br/>
  * Example:
  * <pre>
  * ""        -> false

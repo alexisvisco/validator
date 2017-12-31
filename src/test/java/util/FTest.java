@@ -76,7 +76,7 @@ public class FTest {
                 Validator va = new Validator(new SparkForm(r));
                 rules.forEach((k, v) -> {
                     try {
-                        va.addRule(k, v);
+                        va.addRule(":1 -> :2", k, v);
                     } catch (RuleParseException e) {
                         e.printStackTrace();
                     }
