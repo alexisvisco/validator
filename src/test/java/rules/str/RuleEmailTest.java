@@ -9,20 +9,18 @@ public class RuleEmailTest {
     @Test
     public final void testRuleNumericOk() throws Exception {
         System.out.println("=== TEST FOR `numeric` RULE ===\n");
-        int port = UtilTest.launchWebServer("email");
-        UtilTest.testIt("test@gmail.com", port, true);
-        UtilTest.testIt("123@hotmal.com", port, true);
-        UtilTest.testIt("123@hotmal.fr", port, true);
+        UtilTest.testIt("email", "test@gmail.com", true);
+        UtilTest.testIt("email", "123@hotmal.com", true);
+        UtilTest.testIt("email", "123@hotmal.fr", true);
     }
 
     @Test
     public final void testRuleNumericNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("email");
-        UtilTest.testIt("test@gmail.com.", port, false);
-        UtilTest.testIt("..@fejwn.com", port, false);
-        UtilTest.testIt("..@fejwn.", port, false);
-        UtilTest.testIt("@", port, false);
-        UtilTest.testIt("a.@.fr", port, false);
-        UtilTest.testIt("--@fejwn.com", port, false);
+        UtilTest.testIt("email", "test@gmail.com.", false);
+        UtilTest.testIt("email", "..@fejwn.com", false);
+        UtilTest.testIt("email", "..@fejwn.", false);
+        UtilTest.testIt("email", "@", false);
+        UtilTest.testIt("email", "a.@.fr", false);
+        UtilTest.testIt("email", "--@fejwn.com", false);
     }
 }

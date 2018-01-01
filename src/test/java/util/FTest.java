@@ -1,9 +1,11 @@
 package util;
 
 import com.google.gson.Gson;
+import impl.HashMapForm;
 import kwizzy.validation.Validator;
 import kwizzy.validation.exceptions.RuleParseException;
 import impl.SparkForm;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Service;
 
@@ -16,13 +18,8 @@ import static org.junit.Assert.fail;
 public class FTest {
 
     private static FTest fTest = null;
-    private Service currentService;
-    private int currentPort = UtilTest.portTmp++;
-    private Map<String, String> lastRules = new HashMap<>();
 
-    public FTest() {
-        currentService = Service.ignite();
-        currentService.port(this.currentPort);
+    private FTest() {
     }
 
     public static FTest getInstance() {
@@ -70,32 +67,24 @@ public class FTest {
             System.out.println("Form send: " + fields);
             System.out.println("DefaultRules send: " + rules);
             System.out.println("Expect: " + returnSuccess);
-            System.out.println();
-            UUID uuid = UUID.randomUUID();
-            ftest.currentService.post("/" + uuid.toString() + "/", (r, q) -> {
-                Validator va = new Validator(new SparkForm(r));
-                rules.forEach((k, v) -> {
-                    try {
-                        va.addRule(":1 -> :2", k, v);
-                    } catch (RuleParseException e) {
-                        e.printStackTrace();
-                    }
-                });
-                Map<String, String> check = va.check();
-                if (!check.isEmpty())
-                    return new JSONObject(new Gson().toJson(check));
-                return "{}";
+            Validator va = new Validator(new HashMapForm(fields));
+            rules.forEach((k, v) -> {
+                try {
+                    va.addRule(":1 -> :2", k, v);
+                } catch (RuleParseException e) {
+                    e.printStackTrace();
+                }
             });
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException ignored) {
-            }
-            JSONObject res = SendForm.with(uuid.toString(), fields, ftest.currentPort);
-            if (res == null)
-                fail("Result for form:" + fields + " fail because nothing is returned from the server.");
-            res.keySet().forEach(e -> {
-                if (returnSuccess.get(e) != null && returnSuccess.get(e))
-                    fail(e + " : " + res.getString(e));
+            Map<String, String> check = va.check();
+            System.out.println("Response error(s): " + new Gson().toJson(check));
+            System.out.println();
+            JSONObject res = new JSONObject(new Gson().toJson(check));
+            returnSuccess.forEach((k, v) -> {
+                if (res.has(k) && v)
+                    fail(k + " : " + res.getString(k));
+                else if (!res.has(k) && !v) {
+                    fail("No error for field " + k + ", but need an error... (rule " + rules.get(k) + ")");
+                }
             });
             return ftest;
         }

@@ -1,37 +1,41 @@
 package rules.js;
 
 import org.junit.Test;
+import util.FTest;
 import util.UtilTest;
 
 public class RuleJsArrayTest {
 
     @Test
-    public final void testRuleJsObjOk() throws Exception {
-        System.out.println("=== TEST FOR `json array` RULE ===\n");
-        int port = UtilTest.launchWebServer("json_arr");
-        UtilTest.testIt("[]", port, true);
-        UtilTest.testIt("[1, 3, 3]", port, true);
-        UtilTest.testIt("[\"1\", {\"1\": 3, \"123\": 123456789}]", port, true);
-        UtilTest.testIt("[\"1\", []]", port, true);
-        UtilTest.testIt("[\"1\", [1, 2, \"12\"]]", port, true);
-        UtilTest.testIt("[1, null]", port, true);
-        UtilTest.testIt("[1, 1]", port, true);
-        UtilTest.testIt("[1, 2, 3,]", port, true);
+    public final void testRuleJsArrayOk() throws Exception {
+        FTest.getInstance()
+        .test("json array")
+        .field("test", "[]").rule("test", "json_arr", true).build()
+        .test().field("test", "[]").rule("test", "json_arr", true).build()
+        .test().field("test", "[1, 3, 3]").rule("test", "json_arr", true).build()
+        .test().field("test", "[\"1\", {\"1\": 3, \"123\": 123456789}]").rule("test", "json_arr", true).build()
+        .test().field("test", "[\"1\", []]").rule("test", "json_arr", true).build()
+        .test().field("test", "[\"1\", [1, 2, \"12\"]]").rule("test", "json_arr", true).build()
+        .test().field("test", "[1, null]").rule("test", "json_arr", true).build()
+        .test().field("test", "[1, 1]").rule("test", "json_arr", true).build()
+        .test().field("test", "[1, 2, 3,]").rule("test", "json_arr", true).build();
     }
 
     @Test
-    public final void testRuleJsObjNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("json_arr");
-        UtilTest.testIt("!@#$%^&", port, false);
-        UtilTest.testIt("[", port, false);
-        UtilTest.testIt("}, \"test\": 123", port, false);
-        UtilTest.testIt("{}", port, false);
-        UtilTest.testIt("{\"1\": 123, \"hello\": \"test\"}", port, false);
-        UtilTest.testIt("{\"1\": 123, \"hello\": {1: 3, \"123\": 123456789}}", port, false);
-        UtilTest.testIt("{\"1\": 123, \"hello\": \"[]\"}", port, false);
-        UtilTest.testIt("{]", port, false);
-        UtilTest.testIt("{1: }", port, false);
-        UtilTest.testIt("{1: {1: 3, $}}", port, false);
+    public final void testRuleJsArrayNotOk() throws Exception {
+        FTest.getInstance()
+        .test("json array")
+        .field("test", "!@#$%^&").rule("test", "json_arr", false).build()
+        .test().field("test", "[").rule("test", "json_arr", false).build()
+        .test().field("test", "[1, 2 {}...]").rule("test", "json_arr", false).build()
+        .test().field("test", "}").rule("test", "json_arr", false).build()
+        .test().field("test", "{}").rule("test", "json_arr", false).build()
+        .test().field("test", "{\"1\": 123, \"hello\": \"test\"}").rule("test", "json_arr", false).build()
+        .test().field("test", "{\"1\": 123, \"hello\": {1: 3, \"123\": 123456789}}").rule("test", "json_arr", false).build()
+        .test().field("test", "{\"1\": 123, \"hello\": \"[]\"}").rule("test", "json_arr", false).build()
+        .test().field("test", "{]").rule("test", "json_arr", false).build()
+        .test().field("test", "{1: }").rule("test", "json_arr", false).build()
+        .test().field("test", "{1: {1: 3, $}}").rule("test", "json_arr", false).build();
 
     }
 }

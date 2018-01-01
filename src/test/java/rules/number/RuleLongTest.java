@@ -7,22 +7,20 @@ public class RuleLongTest {
     @Test
     public final void testRuleLongOk() throws Exception {
         System.out.println("=== TEST FOR `long` RULE ===\n");
-        int port = UtilTest.launchWebServer("long");
-        UtilTest.testIt("123", port, true);
-        UtilTest.testIt("-123", port, true);
-        UtilTest.testIt(String.valueOf(Long.MAX_VALUE), port, true);
-        UtilTest.testIt(String.valueOf(Long.MIN_VALUE), port, true);
+        UtilTest.testIt("long", "123", true);
+        UtilTest.testIt("long", "-123", true);
+        UtilTest.testIt("long", String.valueOf(Long.MAX_VALUE), true);
+        UtilTest.testIt("long", String.valueOf(Long.MIN_VALUE), true);
     }
 
     @Test
     public final void testRuleLongNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("long");
-        UtilTest.testIt("!@#$%^&", port, false);
-        UtilTest.testIt("9*123 ", port, false);
-        UtilTest.testIt("-  123. ", port, false);
-        UtilTest.testIt("123 ", port, false);
-        UtilTest.testIt("12 4567", port, false);
-        UtilTest.testIt("12.34", port, false);
-        UtilTest.testIt(String.valueOf(Long.MAX_VALUE) + "1", port, false);
+        UtilTest.testIt("long", "!@#$%^&", false);
+        UtilTest.testIt("long", "9*123 ", false);
+        UtilTest.testIt("long", "-  123. ", false);
+        UtilTest.testIt("long", "123 ", false);
+        UtilTest.testIt("long", "12 4567", false);
+        UtilTest.testIt("long", "12.34", false);
+        UtilTest.testIt("long", String.valueOf(Long.MAX_VALUE) + "1", false);
     }
 }

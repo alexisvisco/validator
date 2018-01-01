@@ -7,22 +7,20 @@ public class RuleIntTest {
     @Test
     public final void testRuleIntOk() throws Exception {
         System.out.println("=== TEST FOR `int` RULE ===\n");
-        int port = UtilTest.launchWebServer("int");
-        UtilTest.testIt("123", port, true);
-        UtilTest.testIt("-123", port, true);
-        UtilTest.testIt(String.valueOf(Integer.MAX_VALUE), port, true);
-        UtilTest.testIt(String.valueOf(Integer.MIN_VALUE), port, true);
+        UtilTest.testIt("int", "123", true);
+        UtilTest.testIt("int", "-123", true);
+        UtilTest.testIt("int", String.valueOf(Integer.MAX_VALUE), true);
+        UtilTest.testIt("int", String.valueOf(Integer.MIN_VALUE), true);
     }
 
     @Test
     public final void testRuleIntNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("int");
-        UtilTest.testIt("!@#$%^&", port, false);
-        UtilTest.testIt("9*123 ", port, false);
-        UtilTest.testIt("-  123. ", port, false);
-        UtilTest.testIt("123 ", port, false);
-        UtilTest.testIt("12 4567", port, false);
-        UtilTest.testIt("12.34", port, false);
-        UtilTest.testIt(String.valueOf(Integer.MAX_VALUE) + "1", port, false);
+        UtilTest.testIt("int", "!@#$%^&", false);
+        UtilTest.testIt("int", "9*123 ", false);
+        UtilTest.testIt("int", "-  123. ", false);
+        UtilTest.testIt("int", "123 ", false);
+        UtilTest.testIt("int", "12 4567", false);
+        UtilTest.testIt("int", "12.34", false);
+        UtilTest.testIt("int", String.valueOf(Integer.MAX_VALUE) + "1", false);
     }
 }

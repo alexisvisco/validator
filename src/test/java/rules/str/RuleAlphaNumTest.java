@@ -9,19 +9,17 @@ public class RuleAlphaNumTest {
     @Test
     public final void testRuleAlphaNumOk() throws Exception {
         System.out.println("=== TEST FOR `alpha_num` RULE ===\n");
-        int port = UtilTest.launchWebServer("alpha_num");
-        UtilTest.testIt("123", port, true);
-        UtilTest.testIt("abc123", port, true);
-        UtilTest.testIt("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", port, true);
+        UtilTest.testIt("alpha_num", "123", true);
+        UtilTest.testIt("alpha_num", "abc123", true);
+        UtilTest.testIt("alpha_num", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", true);
     }
 
     @Test
     public final void testRuleAlphaNotNumOk() throws Exception {
-        int port = UtilTest.launchWebServer("alpha_num");
-        UtilTest.testIt(" ", port, false);
-        UtilTest.testIt("123 ", port, false);
-        UtilTest.testIt("abc ", port, false);
-        UtilTest.testIt("[]", port, false);
-        UtilTest.testIt(".0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", port, false);
+        UtilTest.testIt("alpha_num", " ", false);
+        UtilTest.testIt("alpha_num", "123 ", false);
+        UtilTest.testIt("alpha_num", "abc ", false);
+        UtilTest.testIt("alpha_num", "[]", false);
+        UtilTest.testIt("alpha_num", ".0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", false);
     }
 }

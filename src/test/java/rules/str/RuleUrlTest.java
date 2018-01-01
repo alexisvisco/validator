@@ -9,20 +9,19 @@ public class RuleUrlTest {
     @Test
     public final void testRuleUrlOk() throws Exception {
         System.out.println("=== TEST FOR `numeric` RULE ===\n");
-        int port = UtilTest.launchWebServer("url");
-        UtilTest.testIt("http://foo.com/blah_blah", port, true);
-        UtilTest.testIt("http://foo.com/blah_blah/", port, true);
-        UtilTest.testIt("https://www.example.com/foo/?bar=baz&inga=42&quux", port, true);
-        UtilTest.testIt("http://142.42.1.1/", port, true);
-        UtilTest.testIt("http://j.mp", port, true);
+        UtilTest.testIt("url", "http://foo.com/blah_blah", true);
+        UtilTest.testIt("url", "http://foo.com/blah_blah/", true);
+        UtilTest.testIt("url", "https://www.example.com/foo/?bar=baz&inga=42&quux", true);
+        UtilTest.testIt("url", "http://142.42.1.1/", true);
+        UtilTest.testIt("url", "http://j.mp", true);
+        UtilTest.testIt("url", "http://foo.bar?q=Spaces should be encoded", true);
     }
 
     @Test
     public final void testRuleUrlNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("numeric");
-        UtilTest.testIt("http://" , port, false);
-        UtilTest.testIt("http://##/", port, false);
-        UtilTest.testIt("http://foo.bar?q=Spaces should be encoded", port, false);
-        UtilTest.testIt("http:// shouldfail.com", port, false);
+        UtilTest.testIt("url", "http://" , false);
+        UtilTest.testIt("url", "hello world" , false);
+        UtilTest.testIt("url", "http://##/", false);
+        UtilTest.testIt("url", "http:// shouldfail.com", false);
     }
 }

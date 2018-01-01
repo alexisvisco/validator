@@ -1,12 +1,14 @@
 package util;
 
 import com.google.gson.Gson;
+import impl.HashMapForm;
 import kwizzy.validation.Validator;
 import kwizzy.validation.parser.RuleLexer;
 import impl.SparkForm;
 import org.json.JSONObject;
 import spark.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -15,11 +17,9 @@ public class UtilTest {
 
     public static int portTmp = 4000;
 
-    public static void testIt(String value, int port, boolean success)
+    public static void testIt(String rule, String value, boolean success)
     {
-        JSONObject res = SendForm.with("test", value, port);
-        if (res.keySet().isEmpty() != success)
-            fail((res.toString(2)));
+        FTest.getInstance().test().field("test", value).rule("test", rule, success).build();
     }
 
     public static int launchWebServer(String ruleToTest)

@@ -9,22 +9,20 @@ public class RuleBoolTest {
     @Test
     public final void testRuleBoolOk() throws Exception {
         System.out.println("=== TEST FOR `bool` RULE ===\n");
-        int port = UtilTest.launchWebServer("bool");
-        UtilTest.testIt("true", port, true);
-        UtilTest.testIt("false", port, true);
-        UtilTest.testIt("0", port, true);
-        UtilTest.testIt("1", port, true);
+        UtilTest.testIt("bool", "true", true);
+        UtilTest.testIt("bool", "false", true);
+        UtilTest.testIt("bool", "0", true);
+        UtilTest.testIt("bool", "1", true);
     }
 
     @Test
     public final void testRuleBoolNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("bool");
-        UtilTest.testIt("truee", port, false);
-        UtilTest.testIt("flasee", port, false);
-        UtilTest.testIt(" 0", port, false);
-        UtilTest.testIt(" 1", port, false);
-        UtilTest.testIt("2", port, false);
-        UtilTest.testIt("yes", port, false);
-        UtilTest.testIt("no", port, false);
+        UtilTest.testIt("bool", "truee", false);
+        UtilTest.testIt("bool", "flasee", false);
+        UtilTest.testIt("bool", " 0", false);
+        UtilTest.testIt("bool", " 1", false);
+        UtilTest.testIt("bool", "2", false);
+        UtilTest.testIt("bool", "yes", false);
+        UtilTest.testIt("bool", "no", false);
     }
 }

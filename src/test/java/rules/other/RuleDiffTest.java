@@ -9,17 +9,13 @@ public class RuleDiffTest {
     @Test
     public final void testRuleMinOk() throws Exception {
         System.out.println("=== TEST FOR `diff` RULE ===\n");
-        int port = UtilTest.launchWebServer("diff:hello world");
-        UtilTest.testIt("hello", port, true);
-        port = UtilTest.launchWebServer("diff:123");
-        UtilTest.testIt("1234", port, true);
+        UtilTest.testIt("diff:hello world", "hello", true);
+        UtilTest.testIt("diff:123", "1234", true);
     }
 
     @Test
     public final void testRuleMinNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("diff:hello world");
-        UtilTest.testIt("hello world", port, false);
-        port = UtilTest.launchWebServer("diff:123");
-        UtilTest.testIt("123", port, false);
+        UtilTest.testIt("diff:hello world", "hello world", false);
+        UtilTest.testIt("diff:123", "123", false);
     }
 }

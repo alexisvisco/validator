@@ -8,21 +8,19 @@ public class RuleDoubleTest {
     @Test
     public final void testRuleDoubleOk() throws Exception {
         System.out.println("=== TEST FOR `double` RULE ===\n");
-        int port = UtilTest.launchWebServer("double");
-        UtilTest.testIt("123", port, true);
-        UtilTest.testIt("-123", port, true);
-        UtilTest.testIt("-56789.3456789", port, true);
-        UtilTest.testIt("987654.3456789", port, true);
-        UtilTest.testIt(String.valueOf(Double.MAX_VALUE), port, true);
-        UtilTest.testIt(String.valueOf(Double.MIN_VALUE), port, true);
+        UtilTest.testIt("double", "123", true);
+        UtilTest.testIt("double", "-123", true);
+        UtilTest.testIt("double", "-56789.3456789", true);
+        UtilTest.testIt("double", "987654.3456789", true);
+        UtilTest.testIt("double", String.valueOf(Double.MAX_VALUE), true);
+        UtilTest.testIt("double", String.valueOf(Double.MIN_VALUE), true);
     }
 
     @Test
     public final void testRuleDoubleNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("double");
-        UtilTest.testIt("!@#$%^&", port, false);
-        UtilTest.testIt("9*123 ", port, false);
-        UtilTest.testIt("9.34567%", port, false);
-        UtilTest.testIt("-  123. ", port, false);
+        UtilTest.testIt("double", "!@#$%^&", false);
+        UtilTest.testIt("double", "9*123 ", false);
+        UtilTest.testIt("double", "9.34567%", false);
+        UtilTest.testIt("double", "-  123. ", false);
     }
 }

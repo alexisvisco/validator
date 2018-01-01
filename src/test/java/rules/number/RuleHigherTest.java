@@ -7,22 +7,19 @@ public class RuleHigherTest {
     @Test
     public final void testRuleHigherOk() throws Exception {
         System.out.println("=== TEST FOR `lesser` RULE ===\n");
-        int port = UtilTest.launchWebServer("higher:5");
-        UtilTest.testIt("124", port, true);
-        UtilTest.testIt("12", port, true);
-        port = UtilTest.launchWebServer("higher:-15");
-        UtilTest.testIt("-12", port, true);
-        UtilTest.testIt("67", port, true);
+        UtilTest.testIt("higher:5", "124", true);
+        UtilTest.testIt("higher:5", "12", true);
+        UtilTest.testIt("higher:-15", "-12", true);
+        UtilTest.testIt("higher:-15", "67", true);
     }
 
     @Test
     public final void testRuleHigherNotOk() throws Exception {
-        int port = UtilTest.launchWebServer("higher:5");
-        UtilTest.testIt("!@#$%^&", port, false);
-        UtilTest.testIt("12a", port, false);
-        UtilTest.testIt("4", port, false);
-        UtilTest.testIt("3", port, false);
-        UtilTest.testIt("-4", port, false);
-        UtilTest.testIt("0", port, false);
+        UtilTest.testIt("higher:5", "!@#$%^&", false);
+        UtilTest.testIt("higher:5", "12a", false);
+        UtilTest.testIt("higher:5", "4", false);
+        UtilTest.testIt("higher:5", "3", false);
+        UtilTest.testIt("higher:5", "-4", false);
+        UtilTest.testIt("higher:5", "0", false);
     }
 }
