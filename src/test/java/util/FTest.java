@@ -5,6 +5,7 @@ import impl.HashMapForm;
 import kwizzy.validation.Validator;
 import kwizzy.validation.exceptions.RuleParseException;
 import impl.SparkForm;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Service;
@@ -53,8 +54,9 @@ public class FTest {
         }
 
         public ExecuteTests rule(String field, String rule, boolean success) {
+            for (String s : field.split(","))
+                returnSuccess.put(StringUtils.deleteWhitespace(s), success);
             rules.put(field, rule);
-            returnSuccess.put(field, success);
             return this;
         }
 

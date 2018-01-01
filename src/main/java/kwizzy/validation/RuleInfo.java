@@ -2,6 +2,7 @@ package kwizzy.validation;
 
 import kwizzy.validation.impl.RuleDescriptor;
 import kwizzy.validation.parser.RuleLexer;
+import org.json.JSONArray;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +14,7 @@ public class RuleInfo {
     private final String ruleName;
     private final int paramsCount;
     private final List<String> params;
+    private boolean isOptional;
 
     public RuleInfo(String path, RuleDescriptor ruleObj, RuleLexer.Token tok) {
         this.field = path;
@@ -20,6 +22,7 @@ public class RuleInfo {
         this.paramsCount = tok.getParams().size();
         this.params = tok.getParams();
         this.ruleObj = ruleObj;
+        setOptional();
     }
 
     public RuleInfo(String path, RuleDescriptor rule, String... params) {
@@ -28,6 +31,25 @@ public class RuleInfo {
         this.paramsCount = params.length;
         this.params = Arrays.asList(params);
         this.ruleObj = rule;
+        setOptional();
+    }
+
+    private void setOptional() {
+        if (ruleName.equals("optional") && paramsCount == 0)
+            isOptional = true;
+        else if (ruleName.contains("optional") && paramsCount == 1)
+        {
+            JSONArray ja = new JSONArray(params.get(0));
+            for (int i = 0; i < ja.length(); i++) {
+                if (field.equals(ja.getString(i))) {
+                    isOptional = true;
+                }
+            }
+        }
+    }
+
+    public boolean isOptional() {
+        return isOptional;
     }
 
     public String getField() {

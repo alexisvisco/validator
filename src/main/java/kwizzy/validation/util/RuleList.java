@@ -15,7 +15,7 @@ public class RuleList extends ArrayList<RuleDescriptor> {
 
     public Optional<RuleDescriptor> getRule(Integer paramCount, String ruleName) {
         return this.stream()
-                .filter(e -> (paramCount == e.getParamsCount() && e.getRuleName().equals(ruleName)))
+                .filter(e -> ((e.getParamsCount() == -1 || paramCount == e.getParamsCount()) && e.getRuleName().equals(ruleName)))
         .findFirst();
     }
 }

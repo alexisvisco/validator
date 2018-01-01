@@ -100,7 +100,7 @@ public class Validator {
 
     public Map<String, String> check() {
         rules.forEach((field, value) -> {
-            boolean optional = value.stream().anyMatch(e -> e.getRuleInfo().getRuleName().equals("optional"));
+            boolean optional = value.stream().anyMatch(e -> e.getRuleInfo().isOptional());
             if (!form.getString(field).isPresent() && !optional) {
                 errors.put(field, field + " is undefined.");
                 return;

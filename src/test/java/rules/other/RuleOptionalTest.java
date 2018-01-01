@@ -12,6 +12,8 @@ public class RuleOptionalTest {
         FTest.getInstance().test("optional")
                 .rule("test", "optional", true)
                 .field("test", "1").build()
+                .test().rule("test, facebook", "optional: ([facebook])", true)
+                .field("test", "1").build()
                 .test().rule("test", "optional", true)
                 .build().test()
                 .rule("test", "optional|email", true)
@@ -23,6 +25,9 @@ public class RuleOptionalTest {
     public final void testRuleOptionalNotOk() throws Exception {
         FTest.getInstance().test("optional")
                 .rule("test", "optional|higher:5", false)
+                .field("test", "1").build()
+                .test().rule("test, facebook", "optional: ([test])", false)
+                .rule("test", "optional", true) // to detect that test is optional but not facebook
                 .field("test", "1").build();
     }
 }

@@ -42,7 +42,7 @@ public enum DefaultRules implements RuleDescriptor {
     MIN(RuleMin.class, "min_length", 1, ":attr must be at least of :1 length."),
     DIFF(RuleDiff.class, "diff", 1, ":attr is same as :1."),
     BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),
-    OPTIONAL(RuleOptional.class, "optional", 0, ":attr is optional."),
+    OPTIONAL(RuleOptional.class, "optional", -1, ":attr is optional."),
     UNIQUE(RuleUnique.class, "unique", 2, ":attr already exist."),
 
     ;
