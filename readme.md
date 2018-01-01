@@ -5,6 +5,7 @@ Validator is a simple library that help you to handle form validation.
 It's a painful task that needs to be automated.
 Fortunately my lib is here for you. It will save you a lot of time!
 
+Wiki is here: https://alexisvisco.gitbooks.io/validator/
 ### How to use with spark
 
 Import this in your code base: [SparkForm.java](https://github.com/AlexisVisco/Validator/blob/master/src/test/java/impl/SparkForm.java)
