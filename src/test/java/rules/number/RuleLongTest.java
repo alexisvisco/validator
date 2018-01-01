@@ -15,7 +15,7 @@ public class RuleLongTest {
 
     @Test
     public final void testRuleLongNotOk() throws Exception {
-        UtilTest.testIt("long", "!@#$%^&", true);
+        UtilTest.testIt("long", "!@#$%^&", false);
         UtilTest.testIt("long", "9*123 ", false);
         UtilTest.testIt("long", "-  123. ", false);
         UtilTest.testIt("long", "123 ", false);

@@ -1,4 +1,4 @@
-## Form validator
+## Form validator [![CircleCI](https://img.shields.io/circleci/project/github/AlexisVisco/Validator.svg)]()
 
 ### How to use with spark
 
