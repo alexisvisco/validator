@@ -8,6 +8,8 @@ import kwizzy.validation.util.BiValue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static kwizzy.validation.config.ValidatorConfig.cfg;
 
@@ -162,7 +164,7 @@ public class RuleLexer {
         }
 
         public List<String> getParams() {
-            return params;
+            return params.stream().map(e -> e.replace(Pattern.quote("\\)"), ")")).collect(Collectors.toList());
         }
 
         public void setParams(List<String> params) {

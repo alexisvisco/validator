@@ -56,8 +56,10 @@ public class Validator {
      *             - All rules are transformed  by {@link RuleParser#getRuleInfo(String, String)}<br>
      *             </pre>
      * @param replacements is optional. if a rule contain array_contain:(:1) and replacement
-     *                    a all :1 will be replaced by the first replacement.
-     * @return this validator in order to chain {@link Validator#addRule(String, String)}
+     *                     a all :1 will be replaced by the first replacement.
+     *                     If replacement is a $NUMBER, replacement will be executed after
+     *                     the lexer.
+     * @return this validator in order to chain {@link Validator#addRule(String, String, String...)}
      * @throws RuleParseException
      */
     public Validator addRule(String rule, String... replacements) throws RuleParseException {
@@ -70,15 +72,15 @@ public class Validator {
                 .map(StringUtils::deleteWhitespace)
                 .collect(Collectors.toList());
         String newRule = exploded[1];
-
         for (String field : fields)
-            addRule(field, newRule);
+            addRule(field, newRule, replacements);
         return this;
     }
 
-    private void addRule(String field, String rules) throws RuleParseException {
+    private void addRule(String field, String rules, String... replacements) throws RuleParseException {
         List<RuleInfo> ruleInfos = RuleParser.getRuleInfo(field, rules);
         for (RuleInfo ruleInfo : ruleInfos) {
+            ruleInfo.replacer(replacements);
             Optional<Rule> rule = ConstructRule.constructRule(ruleInfo.getRuleObj());
             if (!rule.isPresent())
                 throw new RuleParseException("Something wrong when construct Rule for rule name " + ruleInfo.getRuleName());
@@ -115,5 +117,33 @@ public class Validator {
     private void addError(String field, RuleInfo ruleInfo) {
         Optional<String> msg = messages.getMessageFor(ruleInfo.getRuleName(), ruleInfo);
         msg.ifPresent(s -> errors.put(field, s));
+    }
+
+    public Form getForm() {
+        return form;
+    }
+
+    public Map<String, List<Rule>> getRules() {
+        return rules;
+    }
+
+    public void setRules(Map<String, List<Rule>> rules) {
+        this.rules = rules;
+    }
+
+    public Map<String, String> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(Map<String, String> errors) {
+        this.errors = errors;
+    }
+
+    public RulesMessages getMessages() {
+        return messages;
+    }
+
+    public void setMessages(RulesMessages messages) {
+        this.messages = messages;
     }
 }

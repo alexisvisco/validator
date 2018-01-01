@@ -37,14 +37,16 @@ public class RuleInfo {
     private void setOptional() {
         if (ruleName.equals("optional") && paramsCount == 0)
             isOptional = true;
-        else if (ruleName.contains("optional") && paramsCount == 1)
-        {
-            JSONArray ja = new JSONArray(params.get(0));
-            for (int i = 0; i < ja.length(); i++) {
-                if (field.equals(ja.getString(i))) {
-                    isOptional = true;
+
+        else if (ruleName.contains("optional") && paramsCount == 1) {
+            try {
+                JSONArray ja = new JSONArray(params.get(0));
+                for (int i = 0; i < ja.length(); i++) {
+                    if (field.equals(ja.getString(i))) {
+                        isOptional = true;
+                    }
                 }
-            }
+            } catch (Exception e) { }
         }
     }
 
@@ -81,5 +83,15 @@ public class RuleInfo {
                 ", paramsCount=" + paramsCount +
                 ", params=" + params +
                 '}';
+    }
+
+    protected void replacer(String... replacements) {
+        for (int i = 0; i < params.size(); i++) {
+            for (int y = 0; y < replacements.length; y++) {
+                String re = params.get(i).replace("$" + (y + 1), replacements[y]);
+                params.set(i, re);
+            }
+        }
+        setOptional();
     }
 }
