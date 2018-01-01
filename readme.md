@@ -1,4 +1,5 @@
-## Validator - [![CircleCI](https://img.shields.io/circleci/project/github/AlexisVisco/Validator.svg?style=for-the-badge)]()
+[![CircleCI](https://img.shields.io/circleci/project/github/AlexisVisco/Validator.svg?style=for-the-badge)]()
+## Validator
 
 Validator is a simple library that help you to handle form validation.
 It's a painful task that needs to be automated.
