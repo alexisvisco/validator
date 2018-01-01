@@ -44,6 +44,7 @@ public enum DefaultRules implements RuleDescriptor {
     BOOL(RuleBool.class, "bool", 0, ":attr is not a boolean (0, 1, true, false)."),
     OPTIONAL(RuleOptional.class, "optional", -1, ":attr is optional."),
     UNIQUE(RuleUnique.class, "unique", 2, ":attr already exist."),
+    REGEX(RuleRegex.class, "regex", 1, ":attr not match regex: :1."),
 
     ;
 
