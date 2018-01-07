@@ -28,7 +28,6 @@ public class RuleRange extends AbstractRule {
         String p1 = getRuleInfo().getParams().get(0);
         String p2 = getRuleInfo().getParams().get(1);
         if (s.isPresent() && NumberUtils.isParsable(s.get())) {
-            System.out.println(String.format("%s <= %s && %s >= %s", s.get(), p2, s.get(), p1));
             JexlEngine jexl = new JexlBuilder().create();
             String jexlExp = String.format("%s <= %s && %s >= %s", s.get(), p2, s.get(), p1);
             JexlExpression e = jexl.createExpression(jexlExp);

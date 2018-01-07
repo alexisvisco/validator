@@ -3,6 +3,7 @@ package kwizzy.validation.rules.list.other;
 import kwizzy.validation.impl.Form;
 import kwizzy.validation.rules.list.AbstractRule;
 import kwizzy.validation.rules.DefaultRules;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class RuleMin extends AbstractRule {
     public boolean isOkay(Form f) {
         String param = getRuleInfo().getParams().get(0);
         try {
-            int min = Integer.parseInt(param);
+            int min = Integer.parseInt(StringUtils.deleteWhitespace(param));
             Optional<String> s = f.getString(rule.getField());
             return s.filter(str -> str.length() >= min).isPresent();
         } catch (Exception e)

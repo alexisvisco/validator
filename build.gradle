@@ -17,8 +17,8 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.mashape.unirest:unirest-java:1.4.9'
-    testCompile 'org.reflections:reflections:0.9.11'
 
+    compile 'org.reflections:reflections:0.9.11'
     compile "com.sparkjava:spark-core:2.7.1"
     compile 'org.json:json:20140107'
     compile 'com.google.code.gson:gson:2.8.2'

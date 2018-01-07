@@ -84,6 +84,16 @@ public class HashMapForm implements Form {
     }
 
     @Override
+    public Optional<Byte> getByte(String key) {
+        return null;
+    }
+
+    @Override
+    public Optional<Character> getChar(String key) {
+        return null;
+    }
+
+    @Override
     public Optional<Part> getPart(String key) {
         return Optional.empty();
     }

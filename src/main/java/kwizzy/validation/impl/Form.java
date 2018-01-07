@@ -15,6 +15,10 @@ public interface Form {
 
     Optional<Long> getLong(String key);
 
+    Optional<Byte> getByte(String key);
+
+    Optional<Character> getChar(String key);
+
     Optional<String> getString(String key);
 
     Optional<Part> getPart(String key);

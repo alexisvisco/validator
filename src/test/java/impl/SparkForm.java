@@ -13,6 +13,8 @@ public class SparkForm implements Form {
     private JSONObject json;
     private Request req;
     private boolean isJsonBody = false;
+    public static String test;
+    int i;
 
     public SparkForm(Request req, boolean isJsonBody) {
         this.req = req;
@@ -50,6 +52,26 @@ public class SparkForm implements Form {
         try {
             Optional<String> string = getString(key);
             return string.map(Double::parseDouble);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Byte> getByte(String key) {
+        try {
+            Optional<String> string = getString(key);
+            return string.map(Byte::parseByte);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Character> getChar(String key) {
+        try {
+            Optional<String> string = getString(key);
+            return string.map(e -> e.toCharArray()[0]);
         } catch (Exception e) {
             return Optional.empty();
         }

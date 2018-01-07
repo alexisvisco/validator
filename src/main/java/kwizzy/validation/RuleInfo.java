@@ -74,6 +74,7 @@ public class RuleInfo {
         return params;
     }
 
+
     @Override
     public String toString() {
         return "RuleInfo{" +
@@ -82,6 +83,7 @@ public class RuleInfo {
                 ", ruleName='" + ruleName + '\'' +
                 ", paramsCount=" + paramsCount +
                 ", params=" + params +
+                ", isOptional=" + isOptional +
                 '}';
     }
 
