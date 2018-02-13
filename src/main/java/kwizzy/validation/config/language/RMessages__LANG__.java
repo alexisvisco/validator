@@ -53,7 +53,7 @@ class RMessages__LANG__ implements RulesMessages {
 
         ListRules__LANG__() {}
 
-        ListRules__LANG__(String message, int params, String ruleName) {
+        ListRules__LANG__(String ruleName, int params, String message) {
             this.message = message;
             this.ruleName = ruleName;
             this.params = params;

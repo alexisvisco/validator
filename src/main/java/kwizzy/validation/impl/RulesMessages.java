@@ -1,6 +1,7 @@
 package kwizzy.validation.impl;
 
 import kwizzy.validation.RuleInfo;
+import kwizzy.validation.config.ValidatorConfig;
 
 import java.util.Optional;
 
@@ -8,7 +9,11 @@ public interface RulesMessages {
 
     String getLang();
 
-    Optional<String> getMessageFor(String ruleName, RuleInfo r);
+    default Optional<String> getMessageFor(String ruleName, RuleInfo r)
+    {
+        return ValidatorConfig.cfg().ruleList.stream().filter(e -> e.getRuleName().equals(ruleName))
+                .map(e -> replaceInfos(e.getDefaultMessage(), r)).findAny();
+    }
 
     void setMessageFor(String ruleName, String message);
 

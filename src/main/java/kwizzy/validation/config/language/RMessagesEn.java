@@ -1,6 +1,8 @@
 package kwizzy.validation.config.language;
 
 import kwizzy.validation.RuleInfo;
+import kwizzy.validation.Validator;
+import kwizzy.validation.config.ValidatorConfig;
 import kwizzy.validation.impl.RulesMessages;
 import kwizzy.validation.rules.DefaultRules;
 import kwizzy.validation.impl.RuleDescriptor;
@@ -14,13 +16,7 @@ public class RMessagesEn implements RulesMessages {
         return "en";
     }
 
-    @Override
-    public Optional<String> getMessageFor(String ruleName, RuleInfo r) {
-        Optional<RuleDescriptor> o = DefaultRules.getByRuleName(ruleName);
-        if (!o.isPresent())
-                return Optional.empty();
-        return Optional.ofNullable(replaceInfos(o.get().getDefaultMessage(), r));
-    }
+
 
     @Override
     public void setMessageFor(String ruleName, String message) {
