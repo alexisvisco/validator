@@ -108,7 +108,6 @@ public class Validator {
             value.stream()
                     .filter(rule -> !rule.isOkay(form)).map(Rule::getRuleInfo)
                     .forEach(rule -> {
-                        System.out.println(rule);
                         addError(field, rule);
                     });
         });

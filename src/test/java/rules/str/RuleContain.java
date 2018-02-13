@@ -17,7 +17,7 @@ public class RuleContain {
         ValidatorConfig.cfg().defaultLang = "fr";
         ValidatorConfig.cfg().languageList.add(new RMessagesFr());
         System.out.println("=== TEST FOR `lesser` RULE ===\n");
-        UtilTest.testIt("contain:(Hello})", "Hello world", true);
+        UtilTest.testIt("contain:(Hello)", "Hello world", true);
     }
 
 //    @Test

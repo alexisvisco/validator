@@ -20,9 +20,7 @@ class RMessagesFr implements RulesMessages {
 
     @Override
     public Optional<String> getMessageFor(String ruleName, RuleInfo r) {
-        System.out.println("HEllo world");
         Optional<ListRulesFr> o = ListRulesFr.getRuleByName(ruleName);
-        System.out.println(o.isPresent());
         if (!o.isPresent()) {
             try {
                 return cfg().languageList.getByLanguage("en").getMessageFor(ruleName, r);
