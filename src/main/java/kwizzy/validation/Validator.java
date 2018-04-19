@@ -103,7 +103,7 @@ public class Validator {
                 errors.put(field, field + " is undefined.");
                 return;
             }
-            else if (!form.getString(field).isPresent() && optional)
+            else if (!form.getString(field).isPresent() || form.getString(field).get().isEmpty() && optional)
                 return;
             value.stream()
                     .filter(rule -> !rule.isOkay(form)).map(Rule::getRuleInfo)
