@@ -74,6 +74,8 @@ public class ObjectParser<T> {
         Optional obj = Optional.empty();
         if (type == Integer.class || type == int.class)
             obj = form.getInt(field);
+        else if (type == Boolean.class || type == boolean.class)
+            obj = form.getBool(field);
         else if (type == Double.class || type == double.class)
             obj = form.getDouble(field);
         else if (type == Float.class || type == float.class)
