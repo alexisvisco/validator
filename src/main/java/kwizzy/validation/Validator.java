@@ -100,7 +100,7 @@ public class Validator {
         rules.forEach((field, value) -> {
             boolean optional = value.stream().anyMatch(e -> e.getRuleInfo().isOptional());
             if ((!form.getString(field).isPresent() || form.getString(field).get().isEmpty()) && !optional) {
-                errors.put(field, field + " est indéfinis.");
+                errors.put(field, field + " est indéfini.");
                 return;
             }
             else if (!form.getString(field).isPresent() || form.getString(field).get().isEmpty() && optional)
