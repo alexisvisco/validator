@@ -100,16 +100,17 @@ public class Validator {
         rules.forEach((field, value) -> {
             boolean optional = value.stream().anyMatch(e -> e.getRuleInfo().isOptional());
             if (!form.getString(field).isPresent() && !optional) {
-                errors.put(field, field + " is undefined.");
+                errors.put(field, field + " est indéfinis.");
                 return;
             }
             else if (!form.getString(field).isPresent() || form.getString(field).get().isEmpty() && optional)
                 return;
-            value.stream()
-                    .filter(rule -> !rule.isOkay(form)).map(Rule::getRuleInfo)
-                    .forEach(rule -> {
-                        addError(field, rule);
-                    });
+            for (Rule rule : value) {
+                if (!rule.isOkay(form)) {
+                    addError(field, rule.getRuleInfo());
+                    break;
+                }
+            }
         });
         return getErrors();
     }

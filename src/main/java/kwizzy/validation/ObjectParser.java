@@ -88,6 +88,13 @@ public class ObjectParser<T> {
             obj = form.getLong(field);
         else if (type == String.class)
             obj = form.getString(field);
+        else if (type.isEnum())
+        {
+            if (form.getInt(field).isPresent())
+                obj = Optional.ofNullable(type.getEnumConstants()[form.getInt(field).get()]);
+            else if (form.getString(field).isPresent() && !obj.isPresent())
+                obj = Optional.ofNullable(Enum.valueOf((Class<? extends Enum>)type, form.getString(field).get()));
+        }
         if (obj.isPresent())
             return obj.get();
         else
