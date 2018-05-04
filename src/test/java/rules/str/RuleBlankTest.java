@@ -10,7 +10,6 @@ public class RuleBlankTest {
     public final void testRuleBlankOk() throws Exception {
         System.out.println("=== TEST FOR `blank` RULE ===\n");
         UtilTest.testIt("blank", "  ", true);
-        UtilTest.testIt("blank", "", true);
         UtilTest.testIt("blank", "             ", true);
         UtilTest.testIt("blank", "   ", true);
     }

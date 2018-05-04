@@ -11,11 +11,9 @@ public class RuleMaxTest {
         System.out.println("=== TEST FOR `max` RULE ===\n");
         UtilTest.testIt("max_length:3", "abc", true);
         UtilTest.testIt("max_length:3", "a", true);
-        UtilTest.testIt("max_length:3", "", true);
         UtilTest.testIt("max_length:10", "abcdefg", true);
         UtilTest.testIt("max_length:10", " f eneo", true);
         UtilTest.testIt("max_length:10", ".", true);
-        UtilTest.testIt("max:0", "", true);
     }
 
     @Test
