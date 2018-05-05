@@ -37,7 +37,7 @@ public class ObjectParser<T> {
             field.setAccessible(true);
             CustomBinding cb = field.getAnnotation(CustomBinding.class);
             String fnName = cb.value();
-            Set<Method> methods = getMethods(cl, withName(fnName), withParameters(Form.class), withReturnType(field.getType()));
+            Set<Method> methods = getAllMethods(cl, withName(fnName), withParameters(Form.class), withReturnType(field.getType()));
             if (methods.isEmpty())
                 throw new TransferFormException(String.format("Field %s has custom binding method but can't found " +
                         "method call %s.", field.getName(), fnName));
