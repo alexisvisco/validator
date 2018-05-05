@@ -28,7 +28,7 @@ public class RuleHigher extends AbstractRule {
     public boolean isOkay(Form f) {
         Optional<String> s = f.getString(rule.getField());
         String param = getRuleInfo().getParams().get(0);
-        if (s.isPresent() && NumberUtils.isParsable(s.get())) {
+        if (s.isPresent() && NumberUtils.isNumber(s.get())) {
             JexlEngine jexl = new JexlBuilder().create();
             String jexlExp = String.format("%s > %s", s.get(), param);
             JexlExpression e = jexl.createExpression(jexlExp);
